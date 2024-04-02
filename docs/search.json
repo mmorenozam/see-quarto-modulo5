@@ -1,0 +1,1003 @@
+[
+  {
+    "objectID": "index.html#generalidades",
+    "href": "index.html#generalidades",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Generalidades",
+    "text": "Generalidades\n\n\nUno de los objetivos de este curso es el evitar en la medida de lo posible el adentrarnos en teoría estadística. Entre los temas que dejaremos de lado están:\n\nTeoría de la probabilidad básica\nLey de los números grandes\nDistribución muestral (o de muestreo)\nTeorema del límite central\nDescripción a detalle de la distribución normal\nDescripción a detalle de otras distribuciones\nAnálisis de poder\nPruebas para valores discretos univariados\n\nPrueba de bondad de ajuste de \\(\\chi^2\\)\n\nPruebas para valores discretos bivariados\n\nPrueba de independencia de \\(\\chi^2\\)\nPrueba exacta de Fisher\n\n\nSin embargo, es preciso el comenzar por algunas definiciones que inevitablemente serán necesarias para entender de mejor manera el resto del mismo.\nPara esta sesión vamos a instalar nuevos paquetes:\ninstall.packages(c(\"UsingR\", \"datarium\", \"rstatix\", \"car\", \"ggeffects\", \"emmeans\", \"multcomp\", \"multcompView\", \"olsrr\", \"ggpubr\", \"report\", \"parameters\"))\nPara quién esté interesado en un recurso para ver estos temas a profundidad, recomiendo el libro de Danielle Navarro: Learning Statistics with R"
+  },
+  {
+    "objectID": "index.html#pasos-en-una-investigación",
+    "href": "index.html#pasos-en-una-investigación",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Pasos en una investigación",
+    "text": "Pasos en una investigación\n\n\n¿Cuál es la pregunta qué deseo contestar? ¿cuál es mi objetivo?\n\nSuperioridad de mi tratamiento vs. un control\nNo existe diferencia de mi tratamiento vs. un control\nEquivalencia de mi tratamiento vs. una referencia\nAsociación/dependencia/correlación entre una o más variables\n\n¿Qué tipo de estudio voy a llevar a cabo?\n\nExperimental\nObservacional (*)\n\n¿Qué tipo de variables voy a medir?\n\nEs mi respuesta continua o discreta\n\n¿Cuál es el dominio de esas variables?\n\nMi respuesta puede tomar cualquier valor real (positivo la mayor parte del tiempo)"
+  },
+  {
+    "objectID": "index.html#pasos-en-una-investigación-1",
+    "href": "index.html#pasos-en-una-investigación-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Pasos en una investigación",
+    "text": "Pasos en una investigación\n\n\n¿Cuál es el dominio de esas variables? (continuación)\n\nMi respuesta es un porcentaje (entre 0 y 100)\nMi respuesta es dicotómica (si/no)\nMi respuesta es un conteo (puede ser descrita con números enteros únicamente)\nMi respuesta es una proporción (valores entre 0 y 1)\nMi respuesta es categórica y representa un orden\nMi respuesta es categórica pero no representa un orden\n\nSi mi estudio es experimental, ¿qué diseño experimental voy a utilizar para levantar mis datos?\n\nDiseño completamente al azar (DCA)\nDiseño de bloques completamente al azar (DBCA)\nDiseño factorial completo (DFC)\nDiseño cuadrado latino (DCL)"
+  },
+  {
+    "objectID": "index.html#pasos-en-una-investigación-2",
+    "href": "index.html#pasos-en-una-investigación-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Pasos en una investigación",
+    "text": "Pasos en una investigación\n\n\nSi mi estudio es observacional, ¿qué tipo de muestreo voy a llevar a cabo?\n\nSimple\nEstratificado\n\n¿Cuál debería ser el tamaño de mi muestra?\n¿Qué método(s) estadístico(s) voy a utilizar para analizar mis datos?\n\n\n\n¿Qué No debería hacer antes de realizar una investigación?\n\n\n\nEmpezarla sin haber pensado en todas las preguntas anteriores y esperar tener resultados estadísticamente válidos.\n\n\n\n\nUn principio básico del método científico es el analizar los datos en base a un protocolo pre-establecido, y NO a decidir qué análisis llevar a cabo una vez que se ven los datos."
+  },
+  {
+    "objectID": "index.html#conceptos-básicos-de-los-diseños-experimentales",
+    "href": "index.html#conceptos-básicos-de-los-diseños-experimentales",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Conceptos básicos de los diseños experimentales",
+    "text": "Conceptos básicos de los diseños experimentales\n\n\nRepetición/Replicación: es la aplicación de los tratamientos a un determinado número de unidades experimentales (al menos 3). Puede ser igual al tamaño de muestra en ciertos casos.\nAleatoriedad/Randomización: la asignación de unidades experimentales a un tratamiento debe realizarse al azar. Esto evita sesgos en las inferencias estadísticas al precautelar la independencia de los datos recolectados.\nBalance: se refiere al intentar el siempre tener un número igual de unidades experimentales en los tratamientos de interés. Datos no balanceados requieren de métodos estadísticos corregidos."
+  },
+  {
+    "objectID": "index.html#sobre-las-repeticiones",
+    "href": "index.html#sobre-las-repeticiones",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Sobre las repeticiones",
+    "text": "Sobre las repeticiones\n\n¿Son 3 repeticiones sufientes por tratamiento?, y ¿por qué 3?\n\n\nTres repeticiones son una convención que no ha sido demostrada satisfactoriamente, pero es ampliamente adoptada.\nUna manera de determinar de manera fundamentada el número apropiado de repeticiones es llevar a cabo análisis de poder.\n\nLos análisis de poder requieren de información previa acerca de la variación esperada y el tamaño del efecto (diferencia entre tratamientos) a detectar.\nEsto requiere de investigación bibliográfica, o conducción de ensayos piloto."
+  },
+  {
+    "objectID": "index.html#sobre-las-repeticiones-1",
+    "href": "index.html#sobre-las-repeticiones-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Sobre las repeticiones",
+    "text": "Sobre las repeticiones\n\n¿Cuándo el número de repeticiones es igual al tamaño de la muestra?\n\n\nEs común el confundir estos dos términos, más que nada por el contexto:\nCuando hablamos de un experimento con un solo factor (por ejemplo si tenemos una pregunta puntual cómo si la media aritmética de una muestra difiere de un valor establecido), el número de repeticiones coincide con el tamaño de la muestra.\nCuando hablamos de un experimento con dos o más tratamientos (un grupo control y otro experimental por ejemplo), el tamaño de la muestra refiere al total de unidades experimentales en todo el experimento, y el número de repeticiones se refiere al número de unidades experimentales por tratamiento."
+  },
+  {
+    "objectID": "index.html#sobre-el-tamaño-de-la-muestra",
+    "href": "index.html#sobre-el-tamaño-de-la-muestra",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Sobre el tamaño de la muestra",
+    "text": "Sobre el tamaño de la muestra\n\nYa que hemos hablado de las repeticiones, ¿has escuchado del número 30?\n\n\n30 es el número mágico considerado como el mínimo de observaciones requeridas para llevar a cabo un experimento.\nComo otros números en estadística, proviene de convenciones adoptadas a lo largo del tiempo más que de verdades comprobadas.\nEl número 30 ha sido demostrado como una falacia en diversas ocasiones\nSin embargo, 30 es un buen punto de inicio si conocimiento bibliográfico o pre-experimentos no están disponibles para llevar a cabo análisis de poder."
+  },
+  {
+    "objectID": "index.html#muestras-poblaciones-y-muestreos",
+    "href": "index.html#muestras-poblaciones-y-muestreos",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Muestras, poblaciones y muestreos",
+    "text": "Muestras, poblaciones y muestreos\n\n\nMuestra: Es un conjunto de observaciones que provienen de una población de interés. Idealmente, esta debería ser lo suficientemente grande para hacer inferencias de esa población.\nPoblación: Es el conjunto de todas las posibles observaciones de las que tengamos interés en realizar inferencias. Es vital el definir adecuadamente sus características.\nMuestreo: Es el proceso por el cual obtendremos nuestra muestra para un estudio. En estudios experimentales, el muestreo se entiende también como el proceso de aleatorización/randomización de unidades experimentales."
+  },
+  {
+    "objectID": "index.html#muestreo-simple-sin-reemplazo",
+    "href": "index.html#muestreo-simple-sin-reemplazo",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Muestreo simple sin reemplazo",
+    "text": "Muestreo simple sin reemplazo\n\nTomado de Learning Statistics with R"
+  },
+  {
+    "objectID": "index.html#muestreo-simple-con-reemplazo",
+    "href": "index.html#muestreo-simple-con-reemplazo",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Muestreo simple con reemplazo",
+    "text": "Muestreo simple con reemplazo\n\nTomado de Learning Statistics with R"
+  },
+  {
+    "objectID": "index.html#otros-tipos-de-muestreo",
+    "href": "index.html#otros-tipos-de-muestreo",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Otros tipos de muestreo",
+    "text": "Otros tipos de muestreo\n\n\nMuestreo sistemático: consiste en tomar un determinado elemento de la población siguiendo un patrón. Por ejemplo, escoger los múltiplos de cuatro enumerados en una lista de posibles individuos de estudio (solía ser una práctica común en ensayos clínicos).\nMuestreo a conveniencia: consiste en incluir en el estudio a todos los elementos disponibles de la población de interés. Esto sucede sobre todo con poblaciones escasas o de dificil acceso (ejemplo, realizar estudios en comunidades LGBTIQ+).\nMuestreo estratificado: es una combinación del muestreo simple con los sujetos agrupados por alguna característica en común, por ejemplo sexo, edad, hábitat (suele ser usado en exit polls y conteos rápidos)."
+  },
+  {
+    "objectID": "index.html#parámetros-poblacionales-y-estadísticos-muestrales",
+    "href": "index.html#parámetros-poblacionales-y-estadísticos-muestrales",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Parámetros poblacionales y estadísticos muestrales",
+    "text": "Parámetros poblacionales y estadísticos muestrales\n\n\nLos parámetros poblacionales son características de toda una población (ejemplo, supongamos que el IQ de toda una población puede estar caracterizado por una media aritmética, \\(\\mu\\), igual a 100, con una desviación estándar, \\(\\sigma\\), igual a 15).\nSi tomo una muestra de 100 individuos de dicha población, podría tener una media aritmética de esta muestra, \\(\\overline{X}\\), igual a 101.4 y una desviación estándar de la muestra, \\(s\\), igual a 13.7.\nEn otras palabras, la \\(\\overline{X}\\) y \\(s\\) son aproximaciones a los valores verdareros de \\(\\mu\\) y \\(\\sigma\\) de esa población."
+  },
+  {
+    "objectID": "index.html#estimación-de-parámetros-de-población",
+    "href": "index.html#estimación-de-parámetros-de-población",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Estimación de parámetros de población",
+    "text": "Estimación de parámetros de población\nMedia aritmética\n\n\n\n\n\n\n\n\nSímbolo\n¿Qué es?\n¿Sabemos qué es?\n\n\n\n\n\\(\\overline{X}\\)\nMedia aritmética de la muestra\nCalculada de los datos\n\n\n\\(\\mu\\)\nVerdadera media aritmética de la población\nCasi nunca es conocida\n\n\n\\(\\hat{\\mu}\\)\nEstimado de la media aritmética de la población\nSí, identica a \\(\\overline{X}\\)\n\n\n\n\\[\n\\overline{X} = \\frac{1}{n}\\sum^{n}_{i=1}\\left(X_i\\right)\n\\]"
+  },
+  {
+    "objectID": "index.html#estimación-de-parámetros-de-población-1",
+    "href": "index.html#estimación-de-parámetros-de-población-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Estimación de parámetros de población",
+    "text": "Estimación de parámetros de población\nDesviación estándar\n\n\n\n\n\n\n\n\nSímbolo\n¿Qué es?\n¿Sabemos qué es?\n\n\n\n\n\\(s\\)\nDesviación estándar de la muestra\nCalculada de los datos\n\n\n\\(\\sigma\\)\nVerdadera desviación estándar de la población\nCasi nunca es conocida\n\n\n\\(\\hat{\\sigma}\\)\nEstimado de la deviación estándar de la población\nSí, pero no es igual a \\(s\\)\n\n\n\n\n\n\\[\ns = \\sqrt{\\frac{1}{n} \\sum_{i=1}^n (X_i - \\overline{X})^2}\n\\]\n\n\\[\n\\sigma = \\sqrt{\\frac{1}{n-1} \\sum_{i=1}^n (X_i - \\overline{X})^2}\n\\]"
+  },
+  {
+    "objectID": "index.html#estimación-de-parámetros-de-población-2",
+    "href": "index.html#estimación-de-parámetros-de-población-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Estimación de parámetros de población",
+    "text": "Estimación de parámetros de población\nVarianza\n\n\n\n\n\n\n\n\nSímbolo\n¿Qué es?\n¿Sabemos qué es?\n\n\n\n\n\\(s^2\\)\nVarianza de la muestra\nCalculada de los datos\n\n\n\\(\\sigma^2\\)\nVerdadera varianza de la población\nCasi nunca es conocida\n\n\n\\(\\hat{\\sigma}^2\\)\nEstimado de la varianza de la población\nSí, pero no es igual a \\(s^2\\)\n\n\n\n\n\n\\[\ns^2 = \\frac{1}{n} \\sum_{i=1}^n (X_i - \\overline{X})^2\n\\]\n\n\\[\n\\sigma^2 = \\frac{1}{n-1} \\sum_{i=1}^n (X_i - \\overline{X})^2\n\\]"
+  },
+  {
+    "objectID": "index.html#intervalos-de-confianza",
+    "href": "index.html#intervalos-de-confianza",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Intervalos de confianza",
+    "text": "Intervalos de confianza\n\n\nCómo hemos visto, los estimados de las verdaderas \\(\\mu\\) y \\(\\sigma\\) (\\(\\hat{\\mu}\\) y \\(\\hat{\\sigma}\\)) provienen de distribuciones de muestreo, y como tales, inherentemente poseen cierto grado de incertidumbre.\nLos intervalos de confianza son medidas que nos permiten tener una idea de esa incertidumbre.\nEn el estudio de la distribución normal estándar tenemos el conocimiento que existe un 95% de chances que una cantidad normalmente distribuida colectada al azar, estará distante de la media aritmética entre \\(\\pm\\) 1.96 desviaciones estándar.\n\n\n\n\\[\n\\overline{X} - \\left(1.96\\times\\frac{\\sigma}{\\sqrt{n}}\\right) \\leq \\mu \\leq \\overline{X} + \\left(1.96\\times\\frac{\\sigma}{\\sqrt{n}}\\right)\n\\]\n\n\nY se interpreta como: con un 95% de confianza, podemos esperar que la media aritmética verdadera de la población de interés se encuentra contenida entre…\n\n\n\n\n\\[\n\\text{IC}_{95}=\\overline{X} \\pm \\left(1.96\\times\\frac{\\sigma}{\\sqrt{n}}\\right)\n\\]"
+  },
+  {
+    "objectID": "index.html#intervalos-de-confianza-1",
+    "href": "index.html#intervalos-de-confianza-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Intervalos de confianza",
+    "text": "Intervalos de confianza\n\n\nSin embargo, como mencionamos \\(\\sigma\\) es casi nunca conocido, y es necesario hacer una corrección a la fórmula anterior. La distribución normal trabaja bien baja la presunción de un número grande de observaciones.\nEn su lugar, en 1908 el estadístico Gosset parametrizó una distribución para muestras pequeñas que asemeja a la normal. Con el tiempo, esta distribución adoptó el nombre de Student.\nY es precisamente que la fórmula anterior es corregida con la distribución de Student y así poder calcular intervalos de confianza para muestras pequeñas usando \\(s\\) en lugar de \\(\\sigma\\):\n\n\n\n\\[\n\\text{IC}_{95}=\\overline{X} \\pm \\left(t_{n-1,\\alpha/2}\\times\\frac{s}{\\sqrt{n}}\\right)\n\\]\n\n\nDonde el valor \\(t_{n-1,\\alpha/2}\\) refiere a:\n\n\\(n-1\\): los grados de libertad, igual al número de observaciones \\(n\\) de la muestra, menos 1\n\\(\\alpha\\): es el nivel de significancia (probabilidad de obtener un resultado erróneo por azar).\nEstos valores en el pasado se encontraban tabulados en libros de texto, hoy contamos con R!"
+  },
+  {
+    "objectID": "index.html#intervalos-de-confianza-2",
+    "href": "index.html#intervalos-de-confianza-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Intervalos de confianza",
+    "text": "Intervalos de confianza\n\n\nRegresando al ejemplo del IQ, supongamos que medimos al azar el IQ de 5 personas y deseamos calcular el \\(\\text{IC}_{95}\\)\n\n\n\n\nIQ_muestra &lt;- c(101, 98, 116, 96, 129)   # muestra\nn &lt;- 5                                   # número de observaciones\nt95 &lt;- qt(p = 0.975, df = n -1)          # valor de Student para 4 grados de libertad al 5%\nx &lt;- mean(IQ_muestra)                    # media aritmética de la muestra\ns &lt;- sd(IQ_muestra)                      # desviación estándar de la muestra\nls &lt;- x + (t95*s/(n-1))                  # límite superior del IC95\nli &lt;- x - (t95*s/(n-1))                  # límite inferior del IC95"
+  },
+  {
+    "objectID": "index.html#intervalos-de-confianza-3",
+    "href": "index.html#intervalos-de-confianza-3",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Intervalos de confianza",
+    "text": "Intervalos de confianza\n\nRegresando al ejemplo del IQ, supongamos que medimos al azar el IQ de 5 personas y deseamos calcular el \\(\\text{IC}_{95}\\)\n\n\nIQ_muestra &lt;- c(101, 98, 116, 96, 129)   # muestra\nn &lt;- 5                                   # número de observaciones\nt95 &lt;- qt(p = 0.975, df = n -1)          # valor de Student para 4 grados de libertad al 5%\nx &lt;- mean(IQ_muestra)                    # media aritmética de la muestra\ns &lt;- sd(IQ_muestra)                      # desviación estándar de la muestra\nls &lt;- x + (t95*s/(n-1))                  # límite superior del IC95\nli &lt;- x - (t95*s/(n-1))                  # límite inferior del IC95\nprint(paste0(\"Con un 95% de confianza podemos esperar que la verdadera media aritmética de IQ de esta población se encuentre entre [\",round(li,0),\", \",round(ls,0),\"]\"))\n\n[1] \"Con un 95% de confianza podemos esperar que la verdadera media aritmética de IQ de esta población se encuentre entre [98, 118]\""
+  },
+  {
+    "objectID": "index.html#autoevaluación",
+    "href": "index.html#autoevaluación",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Autoevaluación",
+    "text": "Autoevaluación\nLa concentración media de glucosa en ratones sanos se ha estimado en un rango entre 80 y 100 mg/dL. En un experimento, se han medido las siguientes concentraciones de glucosa en 10 ratones de una línea genética se presume tendría potencial de ser modelo de hiperglucemia después de unas cuantas más generaciones de cruce selectivo:\n\nglc_rat &lt;- c(108.7, 93.7, 52.7, 79.0, 74.7, 131.9, 99.5, 63.3, 98.6, 92.7)\n\n\n\n\nLa media aritmética \\(\\overline{X}\\) de la muestra es:\n\n\n\n89.5\n85.5\n91.8\n100.1\n\n\n\n\n\n\nLa desviación de estándar \\(s\\) de la muestra es\n\n\n\n30.6\n18.0\n15.6\n22.9\n\n\n\n\n\n\nEl intervalo de confianza (bajo la distribución de Student) es\n\n\n\n[81.4, 95.3]\n[80.4, 97.3]\n[83.7, 95.3]\n[83.7, 100.3]"
+  },
+  {
+    "objectID": "index.html#hipótesis-de-investigación-vs.-hipótesis-estadísticas",
+    "href": "index.html#hipótesis-de-investigación-vs.-hipótesis-estadísticas",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Hipótesis de investigación vs. hipótesis estadísticas",
+    "text": "Hipótesis de investigación vs. hipótesis estadísticas\n\n\nUna hipótesis de investigación gira alrededor del desarrollar una conclusión científica acerca de un tema de interés del investigador. Ejemplos: el fumar causa cáncer, las vacunas causan/previenen enfermedades.\n\nEs decir, pueden tener una naturaleza subjetiva, que expresan la pregunta del investigador de una manera general sin mayor descripción del ¿cómo? voy a probar o descartarla, ni ¿en qué extensión?.\n\nHipótesis estadísticas, por el contrario, deben ser matemáticamente precisas y basadas en las características de los datos que recolectemos con el fin de probar o descartar la hipótesis de investigación.\n\nCómo es de esperar, el probar o descartar una hipótesis estadística será únicamente válida para la población sobre la cual una muestra fue tomada.\nEs ahí donde radica la importancia en definir la población sujeto de estudio de manera planificada con el objetivo de que cumpla tantos detalles sean necesarios de la hipótesis de investigación. Ejemplo, el modelo animal más usado es el ratón. Si bien es cierto constituye uno de los primeros pasos en el desarrollo de muchas investigaciones, los hallazgos en ratones NO pueden ser inmediatamente atribuibles a suceder en seres humanos."
+  },
+  {
+    "objectID": "index.html#hipótesis-nula-y-alternativa",
+    "href": "index.html#hipótesis-nula-y-alternativa",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Hipótesis nula y alternativa",
+    "text": "Hipótesis nula y alternativa\n\n\nLa formulación de hipótesis estadísticas puede reducirse a establer preguntas de investigación en forma de las hipótesis nula y alternativa.\nSupongamos que tenemos dos grupos experimentales para probar la eficiencia de un nuevo procedimiento quirúrgico. Un grupo de pacientes será sometido a la intervención tradicional (control), y el otro grupo al nuevo procedimiento (experimental).\n\nLa hipótesis nula (\\(H_0\\)) establece que: no existe diferencia entre el grupo control y el grupo experimental,\nMientras que la hipótesis alternativa (\\(H_a\\)) establece que: sí existe differencia entre ambos.\n\n\n\n\n\\[\\begin{align}\nH_0& : \\mu_c = \\mu_e& H_0& : \\mu_c- \\mu_e =0 \\\\\nH_a& : \\mu_c \\neq \\mu_e& H_a& : \\mu_c- \\mu_e \\neq 0\n\\end{align}\\]"
+  },
+  {
+    "objectID": "index.html#tipos-de-errores",
+    "href": "index.html#tipos-de-errores",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Tipos de errores",
+    "text": "Tipos de errores\n\n\nAl llevar a cabo pruebas de hipótesis pueden ocurrir errores\n\n\n\n\\[\\begin{array}{|c||c||c|}\n  \\hline\n  & \\text{Acepta }H_{0} & \\text{Rechaza }H_{0} \\\\\n  \\hline\nH_{0}\\text{ es verdadera} & \\text{Desición correcta} & \\text{Error tipo I} \\\\\n  H_{0}\\text{ es falsa} & \\text{Error tipo II} & \\text{Desición correcta} \\\\\n   \\hline\n\\end{array}\\]\n\n\n\n¿De qué depende que aceptemos correctamente o no la hipótesis nula?\n\n\n\nLas pruebas estadísticas dependen de la cantidad de variación y la diferencia entre tratamientos a detectar (tamaño del efecto). La solución: aumentar el número de observaciones"
+  },
+  {
+    "objectID": "index.html#poder-de-una-prueba-estadística",
+    "href": "index.html#poder-de-una-prueba-estadística",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Poder de una prueba estadística",
+    "text": "Poder de una prueba estadística\n\n\nEl poder de una prueba estadística es la probabilidad de rechazar la hipótesis nula cuando esta es de hecho falsa.\nSe puede derivar de la tabla anterior\n\n\n\n\\[\\begin{array}{|c||c||c|}\n  \\hline\n  & \\text{Acepta }H_{0} & \\text{Rechaza }H_{0} \\\\\n  \\hline\nH_{0}\\text{ es verdadera} & 1-\\alpha\\text{ (Prob. decisión correcta)} & \\alpha\\text{ (Taza Error tipo I)} \\\\\n  H_{0}\\text{ es falsa} & \\beta\\text{ (Taza Error tipo II)} & 1-\\beta\\text{ (Poder)} \\\\\n   \\hline\n\\end{array}\\]\n\n\n\nEn la práctica, existen fórmulas cerradas para la determinación del número mínimo de observaciones para alcanzar un poder adecuado (\\(\\ge\\) 80%).\nA este procedimiento se le conoce como análisis de poder. Este se lo puede realizar en R, por supuesto, pero no es parte de nuestro curso."
+  },
+  {
+    "objectID": "index.html#tamaño-del-efecto",
+    "href": "index.html#tamaño-del-efecto",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Tamaño del efecto",
+    "text": "Tamaño del efecto\n\n\nEl tamaño del efecto (\\(\\theta\\)) es un valor que por lo general es determinado por el investigador y que puede ser la diferencia de interés a detectar en una prueba estadística.\nPor simplicidad, vamos a enfocarnos en el ejercicio de los ratones. Supongamos que el investigador está interesado en saber cual sería el número de ratones que necesitaría para con un 80% de poder, encontrar una diferencia entre la media aritmética de su muestra y un valor que considera razonable chequear igual a 100 mg/dL. Este último valor viene a ser el \\(\\theta\\).\nLas hipótesis de esta prueba se verían así\n\n\n\n\\[\\begin{align}\nH_0& : \\mu_c- \\mu_r = \\theta \\\\\nH_a& : \\mu_c- \\mu_r \\neq \\theta\n\\end{align}\\]\n\n\nSin embargo, la pregunta del investigador aún está incompleta. A tu criterio, ¿qué falta?\nAl formular hipótesis, hemos considerado el caso más simple hasta el momento. Pero recordando la idea inicial del experimento de los ratones, la opción lógica sería preguntarnos ¿cuántos ratones necesitamos para estar seguros que la población sea hiperglucémica? (cuyo valor de glucosa en sangre esté por encima del de un ratón sano)"
+  },
+  {
+    "objectID": "index.html#pruebas-de-dos-colas",
+    "href": "index.html#pruebas-de-dos-colas",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Pruebas de dos colas",
+    "text": "Pruebas de dos colas\n\\[\\begin{align}\nH_0& : \\mu_c- \\mu_r = \\theta \\\\\nH_a& : \\mu_c- \\mu_r \\neq \\theta\n\\end{align}\\]\n\nImagen tomada de UCLA: Advanced Research Computing"
+  },
+  {
+    "objectID": "index.html#pruebas-de-una-cola",
+    "href": "index.html#pruebas-de-una-cola",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Pruebas de una cola",
+    "text": "Pruebas de una cola\n\\[\\begin{align}\nH_0& : \\mu_c- \\mu_r \\ge \\theta \\\\\nH_a& : \\mu_c- \\mu_r &lt; \\theta\n\\end{align}\\]\n\nImagen tomada de UCLA: Advanced Research Computing"
+  },
+  {
+    "objectID": "index.html#pruebas-de-una-cola-1",
+    "href": "index.html#pruebas-de-una-cola-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Pruebas de una cola",
+    "text": "Pruebas de una cola\n\\[\\begin{align}\nH_0& : \\mu_c- \\mu_r \\le \\theta \\\\\nH_a& : \\mu_c- \\mu_r &gt; \\theta\n\\end{align}\\]\n\nImagen tomada de UCLA: Advanced Research Computing"
+  },
+  {
+    "objectID": "index.html#valores-críticos-y-el-valor-p",
+    "href": "index.html#valores-críticos-y-el-valor-p",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Valores críticos y el valor p",
+    "text": "Valores críticos y el valor p\n\n\nPero ¿cómo sabemos si una hipótesis es aceptada o rechazada?\nRegresando al concepto de los intervalos de confianza, los cuartiles de la distribución de Student calculados a un nivel de significancia \\(\\alpha\\) son valores críticos sobre los cuales se determina el rechazo o aceptación de la hipótesis nula.\nEl valor p, describe que tan probable sería observar resultados de la prueba asumiendo que la hipótesis nula no hubiese sido rechazada. Por ello, a menores valores p, mayor la diferencia estadística con respecto a la hipótesis alternativa."
+  },
+  {
+    "objectID": "index.html#antes-de-continuar",
+    "href": "index.html#antes-de-continuar",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Antes de continuar",
+    "text": "Antes de continuar\n\n\nImagen tomada de aquí"
+  },
+  {
+    "objectID": "index.html#antes-de-continuar-1",
+    "href": "index.html#antes-de-continuar-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Antes de continuar",
+    "text": "Antes de continuar\n\n\nEl umbral de 0.05 es una convención arbitraria creada por Fischer en los inicios de la estadística moderna.\nLastimosamente, se ha generalizado la idea de que por más mínima sea la diferencia con respecto a 0.05, esta representa la diferencia entre publicar o no (en el campo académico), entre lanzar o no un nuevo fármaco/producto al mercado (en la industria).\nEn 2014, debido a un fallo de la corte suprema de justicia de los Estados Unidos que le dio la potestad a los inversionistas de farmaceúticas a demandarlas por fallar en reportar efectos secundarios de sus productos a pesar de haber sido hallados estadísticamente no significativos, la Asociación Americana de Estadística (ASA) se vio en la necesidad de definir más exhaustivamente el concepto del valor p.\nEntre las recomendaciones de la ASA, se enfatizó el dar mayor prioridad a la estimación de otros estadísticos complementarios al valor p, tales como intervalos de confianza u otros provenientes de la estadística Bayesiana (intervalos de credibilidad, factores de Bayes).\nEsta última (estadística Bayesiana), ofrece una interpretación más natural al referirnos a los resultados en términos de probabilidades y no en números arbirtrarios como el valor p.\nEn resumen, una investigación no es inútil si el valor p sobrepasa o está por debajo de 0.05 por cantidades pequeñas."
+  },
+  {
+    "objectID": "index.html#antes-de-continuar-2",
+    "href": "index.html#antes-de-continuar-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Antes de continuar",
+    "text": "Antes de continuar\n\n\nEn su lugar, en escenarios en que el valor p está alejado por una décima o varias centésimas de 0.05, los resultados deberían interpretarse como indeterminados para generalizar sobre la población objeto de estudio y específicos a las condiciones experimentales (análisis estadísticos, instrumentos de medición, etc) bajo las cuales fueron tomadas y modeladas las mediciones.\nEn el contexto de los modelos estadísticos que veremos más adelante, esto ha derivado en un “temor” del investigador cuando los resultados no pasan los chequeos de los supuestos sobre los que estos modelos se cimentan. Sobre todo cuando el valor p dista de 0.05 por ínfimas cantidades.\nEsto puede llevar a malas prácticas científicas tales como: no reportar el resultado de los chequeos, blindar los datos, escoger “outliers” y removerlos y en el peor de los casos, manipular los datos para tratar de acomodar nuestros datos a estos chequeos.\nTodo lo que he mencionado, no solamente constituyen casos de mala conducta científica, sino lo que hoy en día se le conoce como p hacking (que se puede resumir a torturar los datos hasta que nos confiesen una verdad agradable a nuestros propósitos)."
+  },
+  {
+    "objectID": "index.html#datos-para-esta-sección",
+    "href": "index.html#datos-para-esta-sección",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Datos para esta sección",
+    "text": "Datos para esta sección\n\n\nPara esta sección del curso usaremos algunas de las tablas de datos del libro Using R for Introductory Statistics, como también del paquete datarium.\nPara ello, instalaremos los paquetes de R: UsingR y datarium.\n\n\n\n\nlibrary(UsingR)\nlibrary(datarium)"
+  },
+  {
+    "objectID": "index.html#pruebas-t",
+    "href": "index.html#pruebas-t",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Pruebas t",
+    "text": "Pruebas t\n\n\nLas pruebas t son usadas para encontrar la diferencia entre dos medias aritméticas.\nLa \\(H_0\\) en estas pruebas es que las medias aritméticas son las mismas.\nSe rechaza la \\(H_0\\) cuando el valor p resultante es \\(&lt;\\) 0.05\nExisten tres tipos de pruebas t\n\nPruebas t de una muestra\nPruebas t de muestras independientes\nPruebas t de muestras emparejadas\n\nEstas pruebas fueron desarrolladas bajo la suposición de la normalidad y de homogeneidad de las varianzas.\nDe acuerdo al teorema del límite central, muestras grandes casi aseguran la normalidad.\nCuando el número de observaciones en una muestra es pequeño, es recomendable llevar a cabo un test de normalidad para decidir si es posible una prueba t o una de sus alternativas."
+  },
+  {
+    "objectID": "index.html#normalidad-de-una-muestra",
+    "href": "index.html#normalidad-de-una-muestra",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Normalidad de una muestra",
+    "text": "Normalidad de una muestra\n\n\nAntes de llevar a cabo las pruebas t, hemos mencionado sus supuestos. Por ello, es aconsejable el siempre realizar estas pruebas antes de usarlas.\nExisten dos tipos de pruebas para establecer si una muestra es normalmente distribuida o no\n\nIndirectamente: gráfico Q-Q\nPrueba formal de normalidad (ejemplo: Shapiro-Wilk)\n\nEn el caso del ANOVA, es importante enfatizar que estas pruebas no necesariamente tienen que hacerse antes de la prueba, como ya veremos más adelante."
+  },
+  {
+    "objectID": "index.html#gráfico-q-q",
+    "href": "index.html#gráfico-q-q",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Gráfico Q-Q",
+    "text": "Gráfico Q-Q\n\n\nEl gráfico Q-Q es una prueba visual indirecta de la normalidad.\nConsiste en crear un gráfico de dispersión entre los valores observados de una muestra vs. los valores que deberían estos tener si siguieran una distribución normal.\nMientras en el gráfico de dispersión los puntos más se distribuyan a lo largo de una diagonal, más cercanos están los datos de la muestra a seguir un distribución normal.\nSu desventaja es que es muy subjetivo, y a menudo requiere una prueba formal para poder confirmarlo."
+  },
+  {
+    "objectID": "index.html#gráfico-q-q-1",
+    "href": "index.html#gráfico-q-q-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Gráfico Q-Q",
+    "text": "Gráfico Q-Q\n\nset.seed(123)\ny &lt;- rnorm(n = 30, mean = 0, sd = 1)  # simulamos 30 observaciones de una normal estandar\nqqnorm(y)                             # producimos el gráfico Q-Q"
+  },
+  {
+    "objectID": "index.html#gráfico-q-q-2",
+    "href": "index.html#gráfico-q-q-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Gráfico Q-Q",
+    "text": "Gráfico Q-Q\n\nset.seed(123)\ny &lt;- rnorm(n = 30, mean = 0, sd = 1)  # simulamos 30 observaciones de una normal estandar\nqqnorm(y)                             # producimos el gráfico Q-Q"
+  },
+  {
+    "objectID": "index.html#prueba-de-normalidad-shapiro-wilk",
+    "href": "index.html#prueba-de-normalidad-shapiro-wilk",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba de normalidad Shapiro-Wilk",
+    "text": "Prueba de normalidad Shapiro-Wilk\n\n\nLa \\(H_0\\) de esta prueba (y del resto de pruebas formales de normalidad) es que un set de \\(n\\) observaciones es normalmente distribuido.\nOtro conocido método es Kolmogorov-Smirnov. Sin embargo, Shapiro-Wilk es más apropiado para cuando el número de muestras es menor a 50.\nPara ilustrar su uso, chequeemos la normalidad de los datos que simulamos anteriormente\n\n\n\n\nshapiro.test(y)\n\n\n    Shapiro-Wilk normality test\n\ndata:  y\nW = 0.97894, p-value = 0.7966"
+  },
+  {
+    "objectID": "index.html#prueba-de-homogeneidad-de-las-varianzas",
+    "href": "index.html#prueba-de-homogeneidad-de-las-varianzas",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba de homogeneidad de las varianzas",
+    "text": "Prueba de homogeneidad de las varianzas\n\n\nEn el caso de comparaciones entre las medias de dos grupos, la homogeneidad de varianzas puede chequearse usando la prueba F.\nLa prueba t de una muestra no requiere chequear este supuesto.\nPara ilustrar su uso, creemos otro vector con datos simulados. En este caso, un igual número de observaciones con la misma desviación estándar pero diferente media:\n\n\n\n\nset.seed(123)\nx &lt;- rnorm(n = 30, mean = 4, sd = 1)\nvar.test(x, y)\n\n\n    F test to compare two variances\n\ndata:  x and y\nF = 1, num df = 29, denom df = 29, p-value = 1\nalternative hypothesis: true ratio of variances is not equal to 1\n95 percent confidence interval:\n 0.4759648 2.1009958\nsample estimates:\nratio of variances \n                 1"
+  },
+  {
+    "objectID": "index.html#supuestos-en-la-práctica",
+    "href": "index.html#supuestos-en-la-práctica",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Supuestos en la práctica",
+    "text": "Supuestos en la práctica\n\n\nUsemos las pruebas con datos reales, esta vez con la tabla de datos crime del paquete Using R.\nEsta tabla de datos contiene registros de las tasas de crimen (# de reportes/100000 habitantes) en 50 estados en los Estados Unidos correspondiente a los años 1983 y 1993.\nSin enfocarnos por el momento en que prueba t específica usaremos, limitémonos a chequear la normalidad y la homogeneidad de varianzas entre las tasas de crimen registradas en 1983 y 1993.\n\n\n\n\ndata(crime)\n\n\n\nNormalidad 1983\n\nshapiro.test(crime$y1983)     \n\n\n    Shapiro-Wilk normality test\n\ndata:  crime$y1983\nW = 0.77333, p-value = 1.827e-07\n\n\n\nNormalidad 1993\n\nshapiro.test(crime$y1993)     \n\n\n    Shapiro-Wilk normality test\n\ndata:  crime$y1993\nW = 0.77348, p-value = 1.841e-07\n\n\n\n\n\n\nHomogeneidad de las varianzas\n\nvar.test(crime$y1983, crime$y1993)\n\n\n    F test to compare two variances\n\ndata:  crime$y1983 and crime$y1993\nF = 0.49163, num df = 50, denom df = 50, p-value = 0.01342\nalternative hypothesis: true ratio of variances is not equal to 1\n95 percent confidence interval:\n 0.2806163 0.8613069\nsample estimates:\nratio of variances \n         0.4916266"
+  },
+  {
+    "objectID": "index.html#transformación-de-variables",
+    "href": "index.html#transformación-de-variables",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Transformación de variables",
+    "text": "Transformación de variables\n\n\nA menudo nos encontraremos con conjuntos de observaciones que no cumplen uno o ninguno de los supuestos.\nAntes de considerar pruebas no paramétricas, podemos intentar transformaciones de variables para regresar al mundo de las pruebas paramétricas. Las transformaciones más usadas son:\n\nLa raíz cuadrada (si los datos no contienen números negativos)\nElevar al cuadrado\nLogaritmo (si los datos solo incluyen números reales positivos, cero excluido)"
+  },
+  {
+    "objectID": "index.html#transformación-de-variables-1",
+    "href": "index.html#transformación-de-variables-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Transformación de variables",
+    "text": "Transformación de variables\n\n\nExiste un método más sofisticado para “normalizar” una muestra. La transformación de Box-Cox.\nCuando se trabaja con muestras transformadas, el objetivo es poder revertir la transformación a las unidades reales para así poder hacer conclusiones sobre las inferencias estadísticas.\nEn otras palabras, una misma transformación debe aplicarse a todos los grupos a ser comparados. NO tiene ningún sentido tratar de realizar inferencias entre grupos donde se hayan usado distintas transformaciones para normalizarlos.\nSi el número de observaciones es muy reducido, usualmente no hay transformación que funcione y se recomienda usar directamente pruebas no paramétricas."
+  },
+  {
+    "objectID": "index.html#transformación-de-variables-2",
+    "href": "index.html#transformación-de-variables-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Transformación de variables",
+    "text": "Transformación de variables\n\n\nRaíz cuadrada\n\nshapiro.test(sqrt(crime$y1983))     \n\n\n    Shapiro-Wilk normality test\n\ndata:  sqrt(crime$y1983)\nW = 0.9411, p-value = 0.01359\n\n\n\nElevar al cuadrado\n\nshapiro.test(crime$y1983^2)     \n\n\n    Shapiro-Wilk normality test\n\ndata:  crime$y1983^2\nW = 0.38921, p-value = 2.954e-13\n\n\n\n\n\n\nLogaritmo\n\nshapiro.test(log(crime$y1983))     \n\n\n    Shapiro-Wilk normality test\n\ndata:  log(crime$y1983)\nW = 0.98076, p-value = 0.5713\n\n\n\nChequeemos con el otro grupo\n\nshapiro.test(log(crime$y1993))     \n\n\n    Shapiro-Wilk normality test\n\ndata:  log(crime$y1993)\nW = 0.96191, p-value = 0.1006\n\n\n\n\n\nHomogeneidad de las varianzas con transformación logarítmica\n\nvar.test(log(crime$y1983), log(crime$y1993))\n\n\n    F test to compare two variances\n\ndata:  log(crime$y1983) and log(crime$y1993)\nF = 0.84048, num df = 50, denom df = 50, p-value = 0.5412\nalternative hypothesis: true ratio of variances is not equal to 1\n95 percent confidence interval:\n 0.4797393 1.4724831\nsample estimates:\nratio of variances \n         0.8404808"
+  },
+  {
+    "objectID": "index.html#prueba-t-de-una-muestra",
+    "href": "index.html#prueba-t-de-una-muestra",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba t de una muestra",
+    "text": "Prueba t de una muestra\n\n\nEs usada para comparar la media aritmética de una muestra con un valor conocido (un estándar por ejemplo).\nPor lo general el valor al que se va a comparar proviene de referencias bibliográficas, pre-experimentos o supociones fundamentadas.\nEn este caso, el supuesto que debe cumplirse es el de la normalidad de los datos\nRegresando a nuestro ejemplo de los ratones, determinemos si la media de la muestra es mayor al límite superior de glucosa de ratones saludables."
+  },
+  {
+    "objectID": "index.html#prueba-t-de-una-muestra-1",
+    "href": "index.html#prueba-t-de-una-muestra-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba t de una muestra",
+    "text": "Prueba t de una muestra\n\nglc_rat &lt;- c(108.7, 93.7, 52.7, 79.0, 74.7, 131.9, 99.5, 63.3, 98.6, 92.7)\nratest &lt;- t.test(glc_rat,\n       mu = 100,\n       alternative = \"greater\")\nratest"
+  },
+  {
+    "objectID": "index.html#prueba-t-de-una-muestra-2",
+    "href": "index.html#prueba-t-de-una-muestra-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba t de una muestra",
+    "text": "Prueba t de una muestra\n\nglc_rat &lt;- c(108.7, 93.7, 52.7, 79.0, 74.7, 131.9, 99.5, 63.3, 98.6, 92.7)\nratest &lt;- t.test(glc_rat,\n       mu = 100,\n       alternative = \"greater\")\nratest\n\n\n    One Sample t-test\n\ndata:  glc_rat\nt = -1.4485, df = 9, p-value = 0.9093\nalternative hypothesis: true mean is greater than 100\n95 percent confidence interval:\n 76.16687      Inf\nsample estimates:\nmean of x \n    89.48"
+  },
+  {
+    "objectID": "index.html#prueba-t-de-muestras-independientes",
+    "href": "index.html#prueba-t-de-muestras-independientes",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba t de muestras independientes",
+    "text": "Prueba t de muestras independientes\n\n\nEs usado para comparar las medias aritméticas de dos grupos independientes.\nPor ejemplo, si deseas comparar las medias aritméticas de individuos agrupados por sexo.\nPara ilustrar esta prueba, vamos a hacer uso de la tabla de datos de genderweight del paquete datarium.\n\nVeamos si existe una diferencia significativa en la media del peso entre hombres y mujeres\n\n\n\n\n\ndata(genderweight)"
+  },
+  {
+    "objectID": "index.html#prueba-t-de-muestras-independientes-1",
+    "href": "index.html#prueba-t-de-muestras-independientes-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba t de muestras independientes",
+    "text": "Prueba t de muestras independientes\n\n\nChequeamos normalidad: Group M\n\nshapiro.test(subset(genderweight, group == \"M\")$weight)     \n\n\n    Shapiro-Wilk normality test\n\ndata:  subset(genderweight, group == \"M\")$weight\nW = 0.98634, p-value = 0.9886\n\n\n\nChequeamos normalidad: Group F\n\nshapiro.test(subset(genderweight, group == \"F\")$weight)     \n\n\n    Shapiro-Wilk normality test\n\ndata:  subset(genderweight, group == \"F\")$weight\nW = 0.93847, p-value = 0.2243\n\n\n\n\n\nChequeamos la homogeneidad de las varianzas\n\nvar.test(genderweight$weight ~ genderweight$group)\n\n\n    F test to compare two variances\n\ndata:  genderweight$weight by genderweight$group\nF = 0.21692, num df = 19, denom df = 19, p-value = 0.001648\nalternative hypothesis: true ratio of variances is not equal to 1\n95 percent confidence interval:\n 0.08585766 0.54802553\nsample estimates:\nratio of variances \n         0.2169152 \n\n\n\n\n¡La homogeneidad de las varianzas no se cumple! 😱\n¿Debemos transformar? No necesariamente\nEl no cumplir con el supuesto de la homogeneidad de varianzas no es un gran problema gracias a varias correcciones.\nLa función base de R t.test cuenta con el argumento var.equal = F como default.\nBajo este argumento, no se asumen varianzas iguales entre los grupos y en su lugar R lleva a cabo la aproximación de Welch para lidiar con este problema."
+  },
+  {
+    "objectID": "index.html#prueba-t-de-muestras-independientes-2",
+    "href": "index.html#prueba-t-de-muestras-independientes-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba t de muestras independientes",
+    "text": "Prueba t de muestras independientes\n\ngendertest &lt;- t.test(genderweight$weight ~ genderweight$group)\ngendertest\n\n\n    Welch Two Sample t-test\n\ndata:  genderweight$weight by genderweight$group\nt = -20.791, df = 26.872, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means between group F and group M is not equal to 0\n95 percent confidence interval:\n -24.53135 -20.12353\nsample estimates:\nmean in group F mean in group M \n       63.49867        85.82612"
+  },
+  {
+    "objectID": "index.html#prueba-t-para-muestras-emparejadas",
+    "href": "index.html#prueba-t-para-muestras-emparejadas",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba t para muestras emparejadas",
+    "text": "Prueba t para muestras emparejadas\n\n\nEs usado para comparar las medias de dos grupos que guardan una relación.\nEsto solo ocurre cuando las medidas se han realizado a partir de los mismos grupos. Por ejemplo, al inicio y al final de un experimento.\nPara esta prueba, vamos a usar la tabla de datos crime del paquete UsingR\n\nVeamos si existe una diferencia en las tasas de crimen (# de reportes/100000 habitantes) en 50 estados de los Estados unidos entre 1983 y 1993\n\n\n\n\n\ndata(crime)"
+  },
+  {
+    "objectID": "index.html#prueba-t-para-muestras-emparejadas-1",
+    "href": "index.html#prueba-t-para-muestras-emparejadas-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba t para muestras emparejadas",
+    "text": "Prueba t para muestras emparejadas\n\ncrimetest &lt;- t.test(x = log(crime$y1983), y = log(crime$y1993), paired = TRUE)\ncrimetest\nexp(mean(log(crime$y1983)))\nexp(mean(log(crime$y1993)))"
+  },
+  {
+    "objectID": "index.html#prueba-t-para-muestras-emparejadas-2",
+    "href": "index.html#prueba-t-para-muestras-emparejadas-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba t para muestras emparejadas",
+    "text": "Prueba t para muestras emparejadas\n\ncrimetest &lt;- t.test(x = log(crime$y1983), y = log(crime$y1993), paired = TRUE)\ncrimetest\n\n\n    Paired t-test\n\ndata:  log(crime$y1983) and log(crime$y1993)\nt = -10.027, df = 50, p-value = 1.469e-13\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -0.3628437 -0.2417349\nsample estimates:\nmean difference \n     -0.3022893 \n\nexp(mean(log(crime$y1983)))\n\n[1] 362.8298\n\nexp(mean(log(crime$y1993)))\n\n[1] 490.8915"
+  },
+  {
+    "objectID": "index.html#autoevaluación-1",
+    "href": "index.html#autoevaluación-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Autoevaluación",
+    "text": "Autoevaluación\nEn esta autoevaluación, usaremos tablas de datos del paquete UsingR y datarium:\n\nLa tabla de datos blood (paquete UsingR) tiene las medidas de presión sistólica de sangre correspondientes a 15 pacientes (columna “machine”). De acuerdo al Centro de Prevención y Control de Enfermedades de los Estados Unidos (CDC), una presión sistólica saludable está por debajo de 120 mm Hg. Determina si la media de la muestra contenida en esta tabla de datos está por debajo de este valor sugerido por el CDC.\n\n\ndata(blood)\nblood"
+  },
+  {
+    "objectID": "index.html#pruebas-de-wilcoxon-para-datos-no-normales",
+    "href": "index.html#pruebas-de-wilcoxon-para-datos-no-normales",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Pruebas de Wilcoxon para datos no normales",
+    "text": "Pruebas de Wilcoxon para datos no normales\n\n\nLas pruebas de Wilcoxon usan la mediana como criterio para evaluar la \\(H_0\\).\nLastimosamente, estas pruebas son usualmente menos poderosas (mayor tasa de errores tipo II).\nTiene dos formas:\n\nPruebas para una muestra (análoga a la prueba t para una muestra)\nPruebas para dos muestras (análoga a las pruebas t para dos muestras independientes y emparejadas)"
+  },
+  {
+    "objectID": "index.html#prueba-de-wilcoxon-para-una-muestra",
+    "href": "index.html#prueba-de-wilcoxon-para-una-muestra",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba de Wilcoxon para una muestra",
+    "text": "Prueba de Wilcoxon para una muestra\n\n\nProf. Danielle Navarro midió el nivel de felicidad de sus estudiantes antes y después de su clase de Estadística. Ella estaba interesada en saber si el tomar una clase de Estadística tiene algún efecto en la felicidad de sus estudiantes. Los datos que obtuvo no están normalmente distribuidos. Por ello, se vio en la necesidad de llevar a cabo una prueba de Wilcoxon.\nEn este caso, la \\(H_0\\), es que la diferencia de la mediana de la felicidad de sus estudiantes antes y después de la clase debería ser igual a cero para clamar que no existe tal efecto."
+  },
+  {
+    "objectID": "index.html#prueba-de-wilcoxon-para-una-muestra-1",
+    "href": "index.html#prueba-de-wilcoxon-para-una-muestra-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba de Wilcoxon para una muestra",
+    "text": "Prueba de Wilcoxon para una muestra\n\n# Primero recreo la tabla de Prof. Navarro\nfelicidad &lt;- data.frame(before = c(30,43,21,24,23,40,29,56,38,16),\n                        after = c(6,29,11,31,17,2,31,21,8,21))\nfelicidad$change &lt;- felicidad$after - felicidad$before\n\nmuestra_wilcox &lt;- wilcox.test(felicidad$change, mu = 0)\nreport(muestra_wilcox)\n\nEffect sizes were labelled following Funder's (2019) recommendations.\n\nThe Wilcoxon signed rank exact test testing the difference in rank for\nfelicidad$change and true location of 0 suggests that the effect is negative,\nstatistically significant, and very large (W = 7.00, p = 0.037; r (rank\nbiserial) = -0.75, 95% CI [-0.93, -0.26])"
+  },
+  {
+    "objectID": "index.html#prueba-de-wilcoxon-para-dos-muestras",
+    "href": "index.html#prueba-de-wilcoxon-para-dos-muestras",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba de Wilcoxon para dos muestras",
+    "text": "Prueba de Wilcoxon para dos muestras\n\n\nRegresando al ejemplo de la tabla de datos genderweight, supongamos que estos no están normalmente distribuidos.\nUsaremos la prueba de Wilcoxon para muestras independientes para ver si existe diferencia entre los pesos de hombres y mujeres.\n\n\n\n\ndos_wilcox &lt;- wilcox.test(genderweight$weight ~ genderweight$group, paired = F)\nreport(dos_wilcox)\n\nEffect sizes were labelled following Funder's (2019) recommendations.\n\nThe Wilcoxon rank sum exact test testing the difference in ranks between\ngenderweight$weight and genderweight$group suggests that the effect is\nnegative, statistically significant, and very large (W = 0.00, p &lt; .001; r\n(rank biserial) = -1.00, 95% CI [-1.00, -1.00])"
+  },
+  {
+    "objectID": "index.html#autoevaluación-2",
+    "href": "index.html#autoevaluación-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Autoevaluación",
+    "text": "Autoevaluación\n\nLa tabla de datos normtemp (paquete UsingR) tiene las medidas en grados Fahrenheit de temperatura corporal (columna “temperature” ) correspodientes a 65 mujeres y 65 hombres (columna “gender”). Determina si existe una diferencia entre las temperaturas corporales de hombres y mujeres.\n\n\ndata(normtemp)\nnormtemp"
+  },
+  {
+    "objectID": "index.html#introducción",
+    "href": "index.html#introducción",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Introducción",
+    "text": "Introducción\n\n\nHasta el momento nos hemos enfocado a los casos donde comparamos las medias entre dos grupos.\nPero es más común el evaluar distintos tratamientos al mismo tiempo.\nPara ello, contamos con el ANOVA, desarrollado por el estadístico Ronald Fisher a inicios del siglo 20, y que sin duda es el método estadístico más usado hoy en día.\nEl objetivo de un ANOVA es el de determinar la existencia de diferencias entre las medias aritméticas de las muestras representativas de \\(n\\) poblaciones (o en términos más precisos, tratamientos)."
+  },
+  {
+    "objectID": "index.html#supuestos-del-anova",
+    "href": "index.html#supuestos-del-anova",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Supuestos del ANOVA",
+    "text": "Supuestos del ANOVA\n\n\nIndependencia de los datos: correcta randomización en el diseño del experimento.\nHomogeneidad de las varianzas: la varianza entre los tratamientos es la misma.\nNormalidad: pero, ¿de qué exactamente?\n\n\nCómo vimos antes, la normalidad es un requisito para conducir pruebas t, y lo es también para el ANOVA.\nMuchos libros de texto y otros recursos, mencionan que los datos de cada tratamiento deben ser normalmente distribuidos para llevar a cabo un ANOVA. Esto es cierto e impráctico a la vez.\nMencionamos que como mínimo deberíamos contar con 3 repeticiones por tratamiento. Pero, ¿son 3 repeticiones suficientes para alcanzar la normalidad?\nEs común el sugerir el llevar a cabo una prueba de normalidad antes de un ANOVA, pero debemos considerar que:\n\nCada tratamiento tiene su propia media, en caso de medias muy distantes entre sí, la prueba puede fallar.\nEn su lugar, podrías correr una prueba por cada tratamiento. Esto solo funciona con un considerable número de observaciones/tratamiento (3 no son suficientes)."
+  },
+  {
+    "objectID": "index.html#supuestos-del-anova-1",
+    "href": "index.html#supuestos-del-anova-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Supuestos del ANOVA",
+    "text": "Supuestos del ANOVA\n\n\nEsto nos puede llevar a soluciones erróneas como transformar datos, borrar outliers o utilizar pruebas no paramétricas innecesariamente.\nEntonces, ¿normalidad de qué?\nDe los residuos estandarizados!… ¿Qué es un residual?\n\nUn residual es la diferencia entre una observación y su predicción\nUn residual estandarizado resulta de la división del residual para la raíz cuadrada de la predicción\nLa distribución muestral de los residuos estandarizados tiene media 0 y desviación estándar 1\n\nY es sobre esta distribución que los valores críticos del ANOVA (valores F) son calculados. Es decir, estos no dependen enteramente de los datos originales, por lo tanto los datos originales no tienen que ser necesariamente normalmente distribuidos.\nPero, ¿por qué la confusión? Solo cuando el número de observaciones es lo suficientemente grande, se tiene la certeza que los residuos serán normalmente distribuidos.\nEn resumen, es mejor chequear la normalidad después que realizamos el ANOVA."
+  },
+  {
+    "objectID": "index.html#el-dataset-de-recursos-por-depredación",
+    "href": "index.html#el-dataset-de-recursos-por-depredación",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "El dataset de recursos por depredación",
+    "text": "El dataset de recursos por depredación\n\n\nImagen tomada por David Mark de Pixabay"
+  },
+  {
+    "objectID": "index.html#el-dataset-de-recursos-por-depredación-1",
+    "href": "index.html#el-dataset-de-recursos-por-depredación-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "El dataset de recursos por depredación",
+    "text": "El dataset de recursos por depredación\n\n\nLos datos que usaremos en esta y otras secciones corresponden a un experimento del Prof. Justin C. Touchon acerca de la interacción entre predadores y recursos.\nEl experimento consistió de múltiples tanques (mesocosmos) dispuestos al aire libre en Gamboa, Panamá. Los investigadores tenían por objetivo el saber como la variación en la incubación de huevos de la rana arbórea de ojos rojos podría afectar su desarrollo hasta la metamorfosis bajo varias combinaciones de recursos y predadores.\nLos tratamientos fueron los siguientes:\n\nEdad de incubación: Temprana (E: 4 días después de la oviposición) o tardía (L: 6 días después de la oviposición).\nPredadores: control (C), no letal (NL: larvas de libélula enjauladas) y letal (L: larvas de libélula libres)\nRecursos: bajo (Lo: 0.75 g) o alto (Hi: 1.5 g) de comida suministrados cada 5 días.\n\nLos mesocosmos fueron colocados en 8 bloques de 12 tanques cada uno.\nEl experimento inició con 50 renacuajos por tanque y terminó cuando todos los renacuajos alcanzaron la metamorfosis, o murieron."
+  },
+  {
+    "objectID": "index.html#el-dataset-de-recursos-por-depredación-2",
+    "href": "index.html#el-dataset-de-recursos-por-depredación-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "El dataset de recursos por depredación",
+    "text": "El dataset de recursos por depredación\n\n\nVariables de respuesta:\n\nEdad de metaformosis contada desde el día de oviposición (Age.DPO).\nEdad de salida del agua (Age.FromEmergence)\nLongitud nariz-cloaca al emerger (SVL.initial)\nLongitud de la cola al emerger (Tail.initial)\nLongitud nariz-cloaca al término de la reabsorción de la cola (SVL.final)\nPeso al término de la reabsorción de la cola (Mass.final)\nNúmero de días requeridos por cada metamorfo para reabsorber completamente la cola (Resorb.days)\n\n18 tanques conteniendo predadores no letales fueron descartados debido al brote de una enfermedad\nNOTA: el dataset original de Touchon contiene alrededor de 2500 observaciones. Sin embargo, para poder usar los datos bajo los supuestos del ANOVA es necesario reducirlos a las medias aritméticas de cada tratamiento por cuanto se tratan de pseudo repeticiones. Esta reducción ya está hecha en el archivo “touchon.csv” disponible con el resto de materiales extras del curso."
+  },
+  {
+    "objectID": "index.html#explorando-este-dataset",
+    "href": "index.html#explorando-este-dataset",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Explorando este dataset",
+    "text": "Explorando este dataset\n\n\nHaremos una exploración básica del dataset anteriormente descrito: gráficos de caja y bigote, de barras, de densidad y matrices de dispersión.\nComo estos datos han sido pre-procesados, omitiremos el mapa de observaciones perdidas.\nPara esto, aprovecho la oportunidad para introducir otro par de paquetes útiles\nComo vimos anteriormente, ggplot2 es una poderosa librería de visualización de datos cuyo uso es relativamente sencillo. Sin embargo, su dominio requiere un poco de tiempo y paciencia. Para quienes quizá deseen una manera más rápida de realizar sus gráficos y solamente tomarse el tiempo en añadir detalles finales, usaremos ggpubr."
+  },
+  {
+    "objectID": "index.html#medias-aritméticas-observadas",
+    "href": "index.html#medias-aritméticas-observadas",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Medias aritméticas observadas",
+    "text": "Medias aritméticas observadas\n\n# usaremos nuevamente el paquete `tidycomm` para los estadísticos descriptivos\nranas &lt;- read.csv(\"touchon.csv\")\ndescribe(ranas)\n\nranas \n\n 12  Variables      78  Observations\n--------------------------------------------------------------------------------\nBlock \n       n  missing distinct     Info     Mean      Gmd \n      78        0        8    0.983    4.128    2.645 \n                                                          \nValue          1     2     3     4     5     6     7     8\nFrequency     12    12    12     8    10     8     8     8\nProportion 0.154 0.154 0.154 0.103 0.128 0.103 0.103 0.103\n\nFor the frequency table, variable is rounded to the nearest 0\n--------------------------------------------------------------------------------\nTank.Unique \n       n  missing distinct     Info     Mean      Gmd      .05      .10 \n      78        0       78        1    44.24    32.46     4.85     8.70 \n     .25      .50      .75      .90      .95 \n   20.25    40.50    67.50    84.60    90.15 \n\nlowest :  1  2  3  4  5, highest: 90 91 92 94 96\n--------------------------------------------------------------------------------\nPred \n       n  missing distinct \n      78        0        3 \n                            \nValue          C     L    NL\nFrequency     32    32    14\nProportion 0.410 0.410 0.179\n--------------------------------------------------------------------------------\nHatch \n       n  missing distinct \n      78        0        2 \n                  \nValue        E   L\nFrequency   39  39\nProportion 0.5 0.5\n--------------------------------------------------------------------------------\nRes \n       n  missing distinct \n      78        0        2 \n                  \nValue       Hi  Lo\nFrequency   39  39\nProportion 0.5 0.5\n--------------------------------------------------------------------------------\nAge.DPO \n       n  missing distinct     Info     Mean      Gmd      .05      .10 \n      78        0       77        1    64.69    24.47    43.24    45.12 \n     .25      .50      .75      .90      .95 \n   47.74    57.44    71.68   101.03   114.37 \n\nlowest : 38.1111 40.6341 41.8333 42.65   43.3478\nhighest: 114.114 115.81  128.225 135.121 140.902\n--------------------------------------------------------------------------------\nAge.FromEmergence \n       n  missing distinct     Info     Mean      Gmd      .05      .10 \n      78        0       77        1    30.69    24.47    9.243   11.125 \n     .25      .50      .75      .90      .95 \n  13.738   23.439   37.682   67.031   80.368 \n\nlowest : 4.11111 6.63415 7.83333 8.65    9.34783\nhighest: 80.1136 81.8095 94.225  101.121 106.902\n--------------------------------------------------------------------------------\nSVL.initial \n       n  missing distinct     Info     Mean      Gmd      .05      .10 \n      78        0       78        1       19    1.484    17.37    17.68 \n     .25      .50      .75      .90      .95 \n   18.03    18.94    19.68    21.34    21.73 \n\nlowest : 16.3205 16.6179 16.8889 17.315  17.3838\nhighest: 21.725  21.76   21.9167 22.125  22.3   \n--------------------------------------------------------------------------------\nTail.initial \n       n  missing distinct     Info     Mean      Gmd      .05      .10 \n      78        0       78        1    5.867   0.9237    4.777    4.901 \n     .25      .50      .75      .90      .95 \n   5.330    5.680    6.163    7.004    7.502 \n\nlowest : 4.41111 4.55854 4.58    4.63462 4.80222\nhighest: 7.45833 7.75    7.8     7.8375  8.6    \n--------------------------------------------------------------------------------\nSVL.final \n       n  missing distinct     Info     Mean      Gmd      .05      .10 \n      78        0       78        1    19.38    1.576    17.71    17.90 \n     .25      .50      .75      .90      .95 \n   18.29    19.23    20.02    21.74    22.14 \n\nlowest : 16.6818 17.0222 17.0769 17.5425 17.7432\nhighest: 22.1    22.4    22.6    23.2    23.3   \n--------------------------------------------------------------------------------\nMass.final \n       n  missing distinct     Info     Mean      Gmd      .05      .10 \n      78        0       78        1   0.4301   0.1124   0.3239   0.3323 \n     .25      .50      .75      .90      .95 \n  0.3592   0.4043   0.4618   0.6235   0.6994 \n\nlowest : 0.269318 0.281026 0.293333 0.315135 0.325455\nhighest: 0.6975   0.71     0.712    0.7375   0.75    \n--------------------------------------------------------------------------------\nResorb.days \n       n  missing distinct     Info     Mean      Gmd      .05      .10 \n      78        0       73        1      4.4    0.659    3.632    3.764 \n     .25      .50      .75      .90      .95 \n   4.024    4.255    4.789    5.116    5.546 \n\nlowest : 3.375   3.44444 3.48936 3.51111 3.65385\nhighest: 5.30303 5.53659 5.6     5.75    6.5    \n--------------------------------------------------------------------------------"
+  },
+  {
+    "objectID": "index.html#gráficos-de-barras",
+    "href": "index.html#gráficos-de-barras",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Gráficos de barras",
+    "text": "Gráficos de barras\n\nCódigoGráfico\n\n\n\nlibrary(ggpubr)\nggbarplot(data = ranas,\n          x = \"Pred\",\n          y = \"Age.FromEmergence\",\n          add = \"mean_se\",\n          fill = \"Pred\")\n\nggbarplot(data = ranas,\n          x = \"Res\",\n          y = \"Age.FromEmergence\",\n          add = \"mean_se\",\n          fill = \"Pred\")"
+  },
+  {
+    "objectID": "index.html#gráficos-de-barras-1",
+    "href": "index.html#gráficos-de-barras-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Gráficos de barras",
+    "text": "Gráficos de barras\n\nCódigoGráfico\n\n\n\np1 &lt;- ggbarplot(data = ranas,\n                x = \"Pred\",\n                y = \"Age.FromEmergence\",\n                add = \"mean_se\",\n                fill = \"Pred\")\n\np1 + labs(title = \"Gráfico de barras de edad desde oviposición\",\n       subtitle = \"Datos del estudio de Prof. Touchon\",\n       caption = \"Gráfica propia\",\n       x = \"Predadores\",\n       y = \"Edad desde oviposición\",\n       color = \"Predador\")"
+  },
+  {
+    "objectID": "index.html#gráficos-de-caja-y-bigote",
+    "href": "index.html#gráficos-de-caja-y-bigote",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Gráficos de caja y bigote",
+    "text": "Gráficos de caja y bigote\n\nCódigoGráfico\n\n\n\nggboxplot(data = ranas,\n          x = \"Pred\",\n          y = \"Age.FromEmergence\",\n          fill = \"Pred\")\n\nggboxplot(data = ranas,\n          x = \"Res\",\n          y = \"Age.FromEmergence\",\n          fill = \"Res\")"
+  },
+  {
+    "objectID": "index.html#gráficos-de-densidad",
+    "href": "index.html#gráficos-de-densidad",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Gráficos de densidad",
+    "text": "Gráficos de densidad\n\nCódigoGráfico\n\n\n\nggdensity(data = ranas,\n          x = \"Age.FromEmergence\", \n          add = \"mean\", \n          rug = \"true\", \n          color = \"Pred\", \n          fill = \"Pred\")\n\nggdensity(data = ranas,\n          x = \"Age.FromEmergence\", \n          add = \"mean\", \n          rug = \"true\", \n          color = \"Res\", \n          fill = \"Res\")"
+  },
+  {
+    "objectID": "index.html#matriz-de-dispersión",
+    "href": "index.html#matriz-de-dispersión",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Matriz de dispersión",
+    "text": "Matriz de dispersión\n\nCódigoGráfico\n\n\n\nlibrary(GGally)\nranas_matriz &lt;- ranas[,c(6:12)]\nggpairs(ranas_matriz)"
+  },
+  {
+    "objectID": "index.html#anova-de-una-vía",
+    "href": "index.html#anova-de-una-vía",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "ANOVA de una vía",
+    "text": "ANOVA de una vía\n\n\nANOVA de una vía se refiere cuando tenemos más de dos tratamientos que están definidos por un solo factor a la vez.\nUsando los datos del Prof. Touchon, vamos a ilustrar el caso del ANOVA de una vía. Para ello, vamos a considerar lo siguiente\n\nSupongamos que estamos interesados en saber si existe alguna diferencia entre la edad de salida del agua Age.FromEmergence determinada por los predadores:\nLos niveles del factor predadores son:\n\nPredadores no letales NL\nPredadores letales L\nControl (sin predadores) C\n\n\nLa \\(H_0\\) en todo ANOVA es simplemente que no existe diferencia entre \\(n\\) tratamientos, y la \\(H_a\\) es que al menos uno de los tratamientos tiene una media distinta."
+  },
+  {
+    "objectID": "index.html#anova-en-r",
+    "href": "index.html#anova-en-r",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "ANOVA en R",
+    "text": "ANOVA en R\n\n\nExisten dos formas de llevar a cabo ANOVA en R:\n\nCrear un modelo lineal con la función lm y luego el ANOVA con la función anova sobre el objeto producto de lm.\nAplicar directamente la función aov sobre nuestros datos.\n\nAmbas funciones (lm y aov) tienen la misma sintaxis. La primera opción es la más usada.\nAdicionalmente, el paquete car ofrece la función Anova. El resultado de ambas es prácticamente el mismo para la mayoría de modelos. La ventaja de esta última yace en que Anova puede realizar cálculos de los valores críticos usando sumas de cuadrados de tipo I, II y III."
+  },
+  {
+    "objectID": "index.html#anova-de-una-vía-en-r",
+    "href": "index.html#anova-de-una-vía-en-r",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "ANOVA de una vía en R",
+    "text": "ANOVA de una vía en R\n\n\nOpción 1\n\nlibrary(car)\nlm1 &lt;- lm(Age.FromEmergence ~ Pred, data = ranas)\nAnova(lm1)\n\n\nOpción 2\n\nanova1 &lt;- aov(Age.FromEmergence ~ Pred, data = ranas)\nsummary(anova1)\n\n\n\n\n\n\n\nAnova Table (Type II tests)\n\nResponse: Age.FromEmergence\n          Sum Sq Df F value    Pr(&gt;F)    \nPred        9467  2  10.442 9.986e-05 ***\nResiduals  33999 75                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nPred         2   9467    4733   10.44 9.99e-05 ***\nResiduals   75  33999     453                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "index.html#diagnósticos-del-anova",
+    "href": "index.html#diagnósticos-del-anova",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Diagnósticos del ANOVA",
+    "text": "Diagnósticos del ANOVA\n\n\nAntes de conducir pruebas formales para los supuestos del ANOVA, es preciso darle un vistazo a diagnósticos visuales que podemos obtener del mismo.\nEl ANOVA es un caso de regresión lineal (con predictores categóricos), por lo que en esta sección nos centraremos en la interpretación de estos diagnósticos desde la perspectiva del ANOVA.\nEn el apartado de regresión lineal volveremos a profundizar en las interpretaciones de los mismos para ese caso determinado.\nPara acceder a estos diagnósticos, basta usar la función plot sobre el objeto donde guardamos los resultados del modelo lm1."
+  },
+  {
+    "objectID": "index.html#diagnósticos-del-anova-1",
+    "href": "index.html#diagnósticos-del-anova-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Diagnósticos del ANOVA",
+    "text": "Diagnósticos del ANOVA\n\nlm1 &lt;- lm(Age.FromEmergence ~ Pred, data = ranas)\npar(mfrow = c(2, 2))\nplot(lm1)\npar(mfrow = c(1, 1))"
+  },
+  {
+    "objectID": "index.html#diagnósticos-del-anova-2",
+    "href": "index.html#diagnósticos-del-anova-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Diagnósticos del ANOVA",
+    "text": "Diagnósticos del ANOVA"
+  },
+  {
+    "objectID": "index.html#diagnósticos-del-anova-3",
+    "href": "index.html#diagnósticos-del-anova-3",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Diagnósticos del ANOVA",
+    "text": "Diagnósticos del ANOVA\n\n\n\n\n\n\n\n\nResiduos vs. Valores ajustados\nEn este plot podemos evidenciar departuras del supuesto de la homocedasticidad. Idealmente, la línea roja que se muestra debería ir a lo largo de la horizontal en la coordenada cero del eje y (sobre la línea entrecortada)."
+  },
+  {
+    "objectID": "index.html#diagnósticos-del-anova-4",
+    "href": "index.html#diagnósticos-del-anova-4",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Diagnósticos del ANOVA",
+    "text": "Diagnósticos del ANOVA\n\n\n\n\n\n\n\n\nGráfico Q-Q\nA diferencia del gráfico Q-Q que vimos para las pruebas t, en el eje y de este mismo gráfico para el ANOVA (y regresión lineal) se representan los residuos estandarizados. La interpretación es la misma: idealmente los puntos deberían ir a lo largo de la diagonal. Cuando no es así, evidencia una violación del supuesto de la normalidad."
+  },
+  {
+    "objectID": "index.html#diagnósticos-del-anova-5",
+    "href": "index.html#diagnósticos-del-anova-5",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Diagnósticos del ANOVA",
+    "text": "Diagnósticos del ANOVA\n\n\n\n\n\n\n\n\nRaíz cuadrada de los residuos estandarizados vs. Valores ajustados\nSimilar al primer diagnóstico, en el caso del ANOVA, nos da una idea de posibles departuras de la homogeneidad de las varianzas. La línea roja idealmente debería ser completamente horizontal."
+  },
+  {
+    "objectID": "index.html#diagnósticos-del-anova-6",
+    "href": "index.html#diagnósticos-del-anova-6",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Diagnósticos del ANOVA",
+    "text": "Diagnósticos del ANOVA\n\n\n\n\n\n\n\n\nResiduos vs. Apalancamiento\nAquellos puntos que estén etiquetados con números son mostrados como posibles outliers bajo dos criterios:\n\nEstán por fuera de los límites de la regla del rango intercuartílico (IQR), y\nMarcados como outliers con influencia de apalancamiento mediante la prueba de Cook (distancia de Cook).\n\nEl segundo criterio es un argumento sólido para remover outliers."
+  },
+  {
+    "objectID": "index.html#transformaciones",
+    "href": "index.html#transformaciones",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Transformaciones",
+    "text": "Transformaciones\n\nlm2 &lt;- lm(log(Age.FromEmergence) ~ Pred, data = ranas)\npar(mfrow = c(2, 2))\nplot(lm2)\npar(mfrow = c(1, 1))"
+  },
+  {
+    "objectID": "index.html#transformaciones-1",
+    "href": "index.html#transformaciones-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Transformaciones",
+    "text": "Transformaciones"
+  },
+  {
+    "objectID": "index.html#prueba-formal-de-normalidad",
+    "href": "index.html#prueba-formal-de-normalidad",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba formal de normalidad",
+    "text": "Prueba formal de normalidad\n\n\nComo vimos, después de aplicar la transformación logarítmica el gráfico Q-Q mejoró considerablemente.\nPara estar seguros, podemos correr un test formal sobre los residuos del modelo con la ayuda del paquete olsrr mediante su función ols_test_normality.\n\n\n\n\nlibrary(olsrr)\nols_test_normality(lm2)\n\n-----------------------------------------------\n       Test             Statistic       pvalue  \n-----------------------------------------------\nShapiro-Wilk              0.9802         0.2645 \nKolmogorov-Smirnov        0.0893         0.5625 \nCramer-von Mises          8.6738         0.0000 \nAnderson-Darling          0.5447         0.1566 \n-----------------------------------------------"
+  },
+  {
+    "objectID": "index.html#prueba-formal-de-normalidad-1",
+    "href": "index.html#prueba-formal-de-normalidad-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba formal de normalidad",
+    "text": "Prueba formal de normalidad\n\n\nO también podemos calcular la prueba de Shapiro-Wilk con funciones base de R\n\n\n\n\nresiduos &lt;- resid(lm2)\nshapiro.test(residuos)\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuos\nW = 0.98017, p-value = 0.2645"
+  },
+  {
+    "objectID": "index.html#homogeneidad-de-las-varianzas-en-anova",
+    "href": "index.html#homogeneidad-de-las-varianzas-en-anova",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Homogeneidad de las varianzas en ANOVA",
+    "text": "Homogeneidad de las varianzas en ANOVA\n\n\nLa prueba más usada para chequear la homogeneidad de varianzas de un ANOVA es la de Levene.\nPara ello utilizaremos la función leveneTest del paquete car. Podemos usar esta función directamente sobre los datos con la misma sintaxis de lm, o sobre el objeto lm2 en el que anteriormente almacenamos el resultado del modelo lineal con la transformación.\n\n\n\n\nleveneTest(lm2, center = \"mean\")\n\nLevene's Test for Homogeneity of Variance (center = \"mean\")\n      Df F value  Pr(&gt;F)  \ngroup  2  3.0464 0.05345 .\n      75                  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "index.html#anova-de-una-vía-en-r-continuación",
+    "href": "index.html#anova-de-una-vía-en-r-continuación",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "ANOVA de una vía en R (continuación)",
+    "text": "ANOVA de una vía en R (continuación)\n\n\nAsí, una vez que hemos transformado para obtener normalidad en los residuos y chequeado la homogeneidad de varianzas, es tiempo de hecharle un vistazo al resultado del ANOVA:\n\n\n\n\nlibrary(modelsumm)\n\nError in library(modelsumm): there is no package called 'modelsumm'\n\nAnova(lm2)\n\nAnova Table (Type II tests)\n\nResponse: log(Age.FromEmergence)\n          Sum Sq Df F value    Pr(&gt;F)    \nPred       9.710  2  12.389 2.244e-05 ***\nResiduals 29.392 75                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\nPor tanto, podemos concluir que al menos uno de los tratamientos es distinto (aceptamos la \\(H_a\\) y rechazamos la \\(H_0\\))"
+  },
+  {
+    "objectID": "index.html#qué-tan-distintos",
+    "href": "index.html#qué-tan-distintos",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "¿Qué tan distintos?",
+    "text": "¿Qué tan distintos?\n\n\nPreguntas naturales seguidas de estos resultados son: ¿qué tan distintos son los tratamientos entre sí?, ¿puedo acaso ordernarlos de mayor a menor?, ¿existen pares de tratamientos que son iguales?\nPodemos comenzar con una ayuda visual (ligeramente distinto a nuestro AED, usando la transformación logarítmica)\n\n\n\n\nCódigoGráfico\n\n\n\n# usamos ggpubr nuevamente\nranas$log.Age.FromEmergence &lt;- log(ranas$Age.FromEmergence)\nggboxplot(ranas,\n          x = \"Pred\",\n          y = \"log.Age.FromEmergence\",\n          add = \"jitter\",\n          color = \"Pred\")"
+  },
+  {
+    "objectID": "index.html#comparaciones-múltiples",
+    "href": "index.html#comparaciones-múltiples",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Comparaciones múltiples",
+    "text": "Comparaciones múltiples\n\n\nLos métodos de comparaciones múltiples y gráficos de interacción nos ayudan a responder estas preguntas.\nEn el caso de los gráficos de interacción para ANOVA de una vía, no tiene mucho sentido llevarlos a cabo ya que son más útiles para ANOVA de múltiples vías, así que los dejaremos para después.\nLas comparaciones múltiples más usadas son:\n\nHSD Tukey (Honestly significant difference): lleva a cabo todos los pares de comparaciones posibles entre los niveles de un factor.\nPrueba de Dunnett: Compara los niveles únicamente con respecto al nivel control dentro del factor.\n\nSon conocidas también como pruebas post-hoc.\nEn R, una manera de realizar comparaciones múltiples es mediante los paquetes emmeans y multcomp (este último depende de multcompView, así que no olvides instalarlo también)."
+  },
+  {
+    "objectID": "index.html#hsd-tukey",
+    "href": "index.html#hsd-tukey",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "HSD Tukey",
+    "text": "HSD Tukey\n\nCalculamos las medias marginales a partir del modelo\n\nlibrary(emmeans)\nph1 &lt;- emmeans(lm2, specs = \"Pred\", type = \"response\")\nsummary(ph1)"
+  },
+  {
+    "objectID": "index.html#hsd-tukey-1",
+    "href": "index.html#hsd-tukey-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "HSD Tukey",
+    "text": "HSD Tukey\nCalculamos las medias marginales a partir del modelo\n\nlibrary(emmeans)\nph1 &lt;- emmeans(lm2, specs = \"Pred\", type = \"response\")\nsummary(ph1)\n\n Pred response   SE df lower.CL upper.CL\n C        34.2 3.79 75     27.4     42.6\n L        15.8 1.75 75     12.7     19.7\n NL       26.2 4.38 75     18.8     36.5\n\nConfidence level used: 0.95 \nIntervals are back-transformed from the log scale \n\nreport(ph1)\n\nError: Oops, objects of class [emmGrid] are not supported (yet) by report() :(\n\nWant to help? Check out https://easystats.github.io/report/articles/new_models.html\n\n\n\n\nAhora podemos calcular las comparaciones por pares de HSD Tukey\n\n\ntukey_comp &lt;- contrast(ph1, specs = \"Pred\", method = \"tukey\")\ntukey_comp\n\n contrast ratio    SE df null t.ratio p.value\n C / L    2.165 0.339 75    1   4.936  &lt;.0001\n C / NL   1.307 0.262 75    1   1.335  0.3806\n L / NL   0.604 0.121 75    1  -2.516  0.0368\n\nP value adjustment: tukey method for comparing a family of 3 estimates \nTests are performed on the log scale"
+  },
+  {
+    "objectID": "index.html#prueba-de-dunnett",
+    "href": "index.html#prueba-de-dunnett",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba de Dunnett",
+    "text": "Prueba de Dunnett\n\n\nPara Dunnett, es importante el establecer el grupo control\n\n\ndunnett_comp &lt;- contrast(ph1, specs = \"Pred\", method = \"dunnett\", ref = \"C\")\ndunnett_comp\n\n contrast ratio     SE df null t.ratio p.value\n L / C    0.462 0.0723 75    1  -4.936  &lt;.0001\n NL / C   0.765 0.1535 75    1  -1.335  0.3177\n\nP value adjustment: dunnettx method for 2 tests \nTests are performed on the log scale \n\n\n\n\n\nFinalmente, otra tabla de resumen de las comparaciones múltiples es la de agrupar las medias aritméticas marginales con números (o letras) de acuerdo a si estas son estadísticamente distintas o no entre si. Para ello podemos usar el paquete multcomp:\n\n\n# multcomp necesita un paquete extra llamada multcompView\n# No olvides instalar multcompView antes de correr este código\nlibrary(multcomp)\nmedias_marginales &lt;- cld(ph1)\nmedias_marginales\n\n Pred response   SE df lower.CL upper.CL .group\n L        15.8 1.75 75     12.7     19.7  1    \n NL       26.2 4.38 75     18.8     36.5   2   \n C        34.2 3.79 75     27.4     42.6   2   \n\nConfidence level used: 0.95 \nIntervals are back-transformed from the log scale \nP value adjustment: tukey method for comparing a family of 3 estimates \nTests are performed on the log scale \nsignificance level used: alpha = 0.05 \nNOTE: If two or more means share the same grouping symbol,\n      then we cannot show them to be different.\n      But we also did not show them to be the same."
+  },
+  {
+    "objectID": "index.html#antes-de-continuar-3",
+    "href": "index.html#antes-de-continuar-3",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Antes de continuar…",
+    "text": "Antes de continuar…\n\nUna ayuda a nuestra disposición para interpretar resultados es el paquete report.\n\n\nlibrary(report)\nreport(ratest)\n\nEffect sizes were labelled following Cohen's (1988) recommendations.\n\nThe One Sample t-test testing the difference between glc_rat (mean = 89.48) and\nmu = 100 suggests that the effect is negative, statistically not significant,\nand small (difference = -10.52, 95% CI [76.17, Inf], t(9) = -1.45, p = 0.909;\nCohen's d = -0.46, 95% CI [-1.00, Inf])\n\nreport(crimetest)\n\nEffect sizes were labelled following Cohen's (1988) recommendations.\n\nThe Paired t-test testing the difference between log(crime$y1983) and\nlog(crime$y1993) (mean difference = -0.30) suggests that the effect is\nnegative, statistically significant, and large (difference = -0.30, 95% CI\n[-0.36, -0.24], t(50) = -10.03, p &lt; .001; Cohen's d = -1.40, 95% CI [-1.79,\n-1.01])\n\nreport(gendertest)\n\nEffect sizes were labelled following Cohen's (1988) recommendations.\n\nThe Welch Two Sample t-test testing the difference of genderweight$weight by\ngenderweight$group (mean in group F = 63.50, mean in group M = 85.83) suggests\nthat the effect is negative, statistically significant, and large (difference =\n-22.33, 95% CI [-24.53, -20.12], t(26.87) = -20.79, p &lt; .001; Cohen's d =\n-6.57, 95% CI [-8.42, -4.71])"
+  },
+  {
+    "objectID": "index.html#antes-de-continuar-4",
+    "href": "index.html#antes-de-continuar-4",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Antes de continuar",
+    "text": "Antes de continuar\n\n\nEn este punto, antes de continuar hagamos uso nuevamente del paquete flextable para exportar nuestras tablas a Word.\n\n\n\n\nlibrary(flextable)\ntabla_tukey &lt;- colformat_double(flextable(as.data.frame(tukey_comp)), digits = 3, j = c(2, 3, 6, 7))\ntabla_dunnett &lt;- colformat_double(flextable(as.data.frame(dunnett_comp)), digits = 3, j = c(2, 3, 6, 7))\ntabla_marginal &lt;- colformat_double(flextable(medias_marginales), digits = 3, j = c(2, 3, 5, 6))\n\n\n\n\n\n\ncontrastratioSEdfnullt.ratiop.valueC / L2.1650.3397514.9360.000C / NL1.3070.2627511.3350.381L / NL0.6040.121751-2.5160.037\n\n\n\ncontrastratioSEdfnullt.ratiop.valueL / C0.4620.072751-4.9360.000NL / C0.7650.153751-1.3350.318\n\n\n\nPredresponseSEdflower.CLupper.CL.groupL15.7991.7487512.67319.695 1 NL26.1724.3797518.75436.525  2C34.2083.7867527.44042.645  2"
+  },
+  {
+    "objectID": "index.html#antes-de-continuar-5",
+    "href": "index.html#antes-de-continuar-5",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Antes de continuar",
+    "text": "Antes de continuar\n\n\nLa tabla del ANOVA requiere un poquito más de preparación y para ello nos ayudaremos del paquete rstatix para agregar los asteriscos de significancia.\n\n\nlibrary(rstatix)\ntabla_anova &lt;- as.data.frame(Anova(lm2))\ntabla_anova &lt;- cbind(parametro = row.names(tabla_anova), tabla_anova)\ntabla_anova &lt;- add_significance(tabla_anova, \n                 p.col = \"Pr(&gt;F)\", \n                 output.col = \" \",\n                 cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),\n                 symbols = c(\"***\", \"**\", \"*\", \".\", \"ns\"))\ntabla_anova &lt;- colformat_double(flextable(tabla_anova), digits = 3, j = c(2, 4, 5))\ntabla_anova &lt;- add_footer_lines(tabla_anova, \"Códigos Signif. 0 '***', 0.001 '**', 0.1 '*', 0.05 '.', 0.1 'ns'\")"
+  },
+  {
+    "objectID": "index.html#antes-de-continuar-6",
+    "href": "index.html#antes-de-continuar-6",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Antes de continuar",
+    "text": "Antes de continuar\n\nLa tabla del ANOVA requiere un poquito más de preparación y para ello nos ayudaremos del paquete rstatix para agregar los códigos de significancia.\n\n\nlibrary(rstatix)\ntabla_anova &lt;- as.data.frame(Anova(lm2))\ntabla_anova &lt;- cbind(parametro = row.names(tabla_anova), tabla_anova)\ntabla_anova &lt;- add_significance(tabla_anova, \n                 p.col = \"Pr(&gt;F)\", \n                 output.col = \" \",\n                 cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),\n                 symbols = c(\"***\", \"**\", \"*\", \".\", \"ns\"))\ntabla_anova &lt;- colformat_double(flextable(tabla_anova), digits = 3, j = c(2, 4, 5))\ntabla_anova &lt;- add_footer_lines(tabla_anova, \"Códigos Signif. 0 '***', 0.001 '**', 0.1 '*', 0.05 '.', 0.1 'ns'\")\ntabla_anova\n\n\nparametroSum SqDfF valuePr(&gt;F) Pred9.710212.3890.000***Residuals29.39275Códigos Signif. 0 '***', 0.001 '**', 0.1 '*', 0.05 '.', 0.1 'ns'"
+  },
+  {
+    "objectID": "index.html#gráficos-de-comparaciones-múltiples",
+    "href": "index.html#gráficos-de-comparaciones-múltiples",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Gráficos de comparaciones múltiples",
+    "text": "Gráficos de comparaciones múltiples\n\n\nHay personas que prefieren tener representaciones visuales de las comparaciones múltiples.\nRealizar este tipo de gráficos sin embargo solía demandar buena experiencia ya sea en gráficos base o ggplot2.\nAfortunadamente, rstatix nos brinda la posibilidad de llevarlos a cabo de una manera relativamente sencilla.\nLa idea es generar un gráfico con las medias marginales observadas de la variable de interés y posicionar sobre este los resultados de las comparaciones múltiples con sus códigos de significancia (o valores p).\nLas desventajas de esta visualización son:\n\nTienen mayor sentido realizarlas con HSD Tukey\nCuando el número de pares de comparaciones es muy grande, el gráfico se vuelve más difícil de interpretar que las tablas.\nrstatix no tiene manera de directamente volver a retransformar variables a sus unidades originales.\n\nOtro gráfico de cierta popularidad es el de los grupos de Tukey de las medias marginales (gráficos de barras con los números/letras sobre cada categoría). Para esto utilizaremos además el paquete stringr"
+  },
+  {
+    "objectID": "index.html#gráficos-de-comparaciones-múltiples-1",
+    "href": "index.html#gráficos-de-comparaciones-múltiples-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Gráficos de comparaciones múltiples",
+    "text": "Gráficos de comparaciones múltiples\n\nCódigoGráfico\n\n\n\nranas$Pred &lt;- factor(ranas$Pred, levels = c(\"C\", \"NL\", \"L\"))\nbxplot &lt;- ggboxplot(ranas, x = \"Pred\", \n                    y = \"Age.FromEmergence\", \n                    color = \"Pred\")\nhsdvals &lt;- emmeans_test(log.Age.FromEmergence ~ Pred, \n                        data = ranas, \n                        p.adjust.method = \"mvt\")\nhsdvals &lt;- add_significance(hsdvals, \n                            p.col = \"p.adj\", \n                            output.col = \"p.adj.signif\",\n                            cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),\n                            symbols = c(\"***\", \"**\", \"*\", \".\", \"ns\"))\nhsdvals &lt;- hsdvals %&gt;% add_xy_position(x = \"Pred\")\nbxplot + stat_pvalue_manual(hsdvals, y.position = c(120, 130, 140))"
+  },
+  {
+    "objectID": "index.html#gráficos-de-comparaciones-múltiples-2",
+    "href": "index.html#gráficos-de-comparaciones-múltiples-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Gráficos de comparaciones múltiples",
+    "text": "Gráficos de comparaciones múltiples\n\nCódigoGráfico\n\n\n\nlibrary(stringr)\ngruposvals &lt;- as.data.frame(cld(ph1))\ngruposvals$Pred &lt;- factor(gruposvals$Pred, levels = c(\"C\", \"NL\", \"L\"))\nggplot(gruposvals,\n       aes(x = Pred, \n           y = response, \n           fill = Pred)) +\n  geom_bar(stat = \"identity\", \n           show.legend = F, \n           color = \"black\")+\n  geom_errorbar(aes(ymin = response - SE, \n                    ymax = response + SE), \n                width=0.2)+\n  geom_text(aes(label=str_trim(.group), \n                y = response+SE, vjust=-0.5))"
+  },
+  {
+    "objectID": "index.html#anova-de-un-diseño-desbalanceado",
+    "href": "index.html#anova-de-un-diseño-desbalanceado",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "ANOVA de un diseño desbalanceado",
+    "text": "ANOVA de un diseño desbalanceado\n\n\nRecordemos que 18 tanques con predadores no letales fueron descartados debido al brote de una enfermedad.\nEl diseño original de Touchon era balanceado. Al perderse unidades experimentales, el diseño se le puede denominar como desbalanceado. En otras palabras, el desbalance es la pérdida de observaciones.\nLa mayoría de métodos estadísticos requieren ser corregidos ante observaciones perdidas para poder tener la certeza de que los estimados que obtenemos no sean sesgados.\nSin adentrarnos en mayor detalle, uno de los componentes de la tabla de ANOVA es la suma de cuadrados. Existen tres tipos de suma de cuadrados: I, II y III.\nEn breve, las sumas II y III se aconseja sean usadas cuando existen interacciones en el ANOVA.\nEn R, la función aov calcula la suma de cuadrados tipo I. Este tipo de suma no es conveniente ante la presencia de desbalance de los datos.\nEn cambio, la función Anova del paquete car, usa por default el tipo II que es precisamente el recomendado usar ante la presencia de desbalance.\nEn resumen, sí. Hemos utilizado hasta el momento la corrección adecuada para estos datos."
+  },
+  {
+    "objectID": "index.html#prueba-de-kruskal-wallis",
+    "href": "index.html#prueba-de-kruskal-wallis",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Prueba de Kruskal-Wallis",
+    "text": "Prueba de Kruskal-Wallis\n\n\nLa prueba de Kruskal-Wallis es la alternativa no paramétrica al ANOVA de una vía.\nPuede extenderse al ANOVA de múltiples vías reorganizando el diseño experimental.\nSimilar a las pruebas de Wilcoxon, se basa en encontrar diferencias de las medianas en lugar de las medias y su poder es menor.\nPara ilustrar este ejemplo, tomemos la variable Age.DPO del estudio de Touchon y veamos si existen diferencias con respecto al tratamiento de predador Pred. Age.DPO (sin transformaciones no cumple con los supuestos del ANOVA).\n\n\n\n\nkruskal.test(Age.DPO ~ Pred, data = ranas)\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  Age.DPO by Pred\nKruskal-Wallis chi-squared = 22.255, df = 2, p-value = 1.47e-05"
+  },
+  {
+    "objectID": "index.html#comparaciones-múltiples-con-kruskal-wallis",
+    "href": "index.html#comparaciones-múltiples-con-kruskal-wallis",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Comparaciones múltiples con Kruskal-Wallis",
+    "text": "Comparaciones múltiples con Kruskal-Wallis\n\n\nCon KW también podemos hacer comparaciones múltiples.\nEn R base contamos con la función pairwise.wilcox.test que lleva a cabo comparaciones por pares mediante el método de Wilcoxon.\n\n\n\n\npairwise.wilcox.test(ranas$Age.DPO, ranas$Pred, p.adjust.method = \"BH\")\n\n\n    Pairwise comparisons using Wilcoxon rank sum exact test \n\ndata:  ranas$Age.DPO and ranas$Pred \n\n   C       NL   \nNL 0.303   -    \nL  9.8e-06 0.019\n\nP value adjustment method: BH"
+  },
+  {
+    "objectID": "index.html#autoevaluación-3",
+    "href": "index.html#autoevaluación-3",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Autoevaluación",
+    "text": "Autoevaluación\n\nLa tabla de datos mice2 (paquete datarium) tiene las medidas del peso de 10 ratones antes y después de haber sido sometidos a una determinada dieta. Encuentra si existe una diferencia significativa en el peso de estos ratones antes y después del régimen de dieta al que fueron expuestos. ¿Ganaron o perdieron peso?\n\n\ndata(mice2)\nmice2"
+  },
+  {
+    "objectID": "index.html#anova-de-múltiples-vías",
+    "href": "index.html#anova-de-múltiples-vías",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "ANOVA de múltiples vías",
+    "text": "ANOVA de múltiples vías\n\n\nEl ANOVA puede extenderse para analizar dos o más factores a la vez. Su nombre entonces varía dependiendo de cuántos factores analicemos, así: ANOVA de dos vías (2 factores), ANOVA de tres vías (3 factores) …\nEn la práctica es recomendable diseñar experimentos hasta máximo 3 factores:\n\nA más factores, más costosa la investigación\nA más factores, sus interacciones son más difíciles de interpretar\nEs posible inclusive que tengamos resultados sin sentido (interacciones innecesarias)\n\n¿Qué son las interacciones?\n\nUna interacción se refiere cuando los niveles de un factor podrían depender de los niveles de otro.\nPor ejemplo, con los datos de las ranas, podríamos imaginar que en la ausencia de predadores, tener recursos altos o bajos podría influenciar el tiempo que tomaron los renacuajos en culminar la metamorfosis. Es decir, si hay predadores presentes, podría darse el caso de que las presas se escondan y coman menos influenciando así ese tiempo.\nAsí, podríamos saber si el effecto de los recursos son influenciados ante la presencia de predadores"
+  },
+  {
+    "objectID": "index.html#anova-de-múltiples-vías-en-r",
+    "href": "index.html#anova-de-múltiples-vías-en-r",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "ANOVA de múltiples vías en R",
+    "text": "ANOVA de múltiples vías en R\n\n\nVamos a usar nuevamente los datos de Touchon, la variable de respuesta es la edad de metamorfosis Age.DPO y los factores la presencia de predadores Pred y los recursos Res.\nPara un ANOVA de múltiples vías en R podemos usar la siguiente sintaxis: Factor1*Factor2\nPara ahorrarnos tiempo, supóngamos que ya corrimos un primer ANOVA, y encontramos que usando el logaritmo de Age.DPO podemos normalizar los residuos. Pero nos encontramos con esto:\n\n\n\n\nlm4 &lt;- lm(log(Age.DPO) ~ Pred*Res, data = ranas)\nleveneTest(lm4, center = \"mean\")\n\nLevene's Test for Homogeneity of Variance (center = \"mean\")\n      Df F value    Pr(&gt;F)    \ngroup  5  6.0253 0.0001033 ***\n      72                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n¡La homogeneidad de las varianzas no se cumple! 😱\n¡Ninguna otra transformación funciona!"
+  },
+  {
+    "objectID": "index.html#anova-de-múltiples-vías-en-r-1",
+    "href": "index.html#anova-de-múltiples-vías-en-r-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "ANOVA de múltiples vías en R",
+    "text": "ANOVA de múltiples vías en R"
+  },
+  {
+    "objectID": "index.html#anova-de-múltiples-vías-en-r-2",
+    "href": "index.html#anova-de-múltiples-vías-en-r-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "ANOVA de múltiples vías en R",
+    "text": "ANOVA de múltiples vías en R\n\n\nA parte de reir, en este tipo de situaciones (que son bastante comunes), tenemos dos alternativas:\n\nRealizar pruebas no paramétricas, o\nCalcular ANOVAs con correcciones para heterocedasticidad.\n\nPero como acuñó el Ec. y estadístico Milton Friedman: “No existe tal cosa como un almuerzo gratis”, usar la segunda opción no es tan fácil como hemos venido viendo.\nEn R, tenemos estos caminos (de peor a mejor opción):\n\nRealizar el ANOVA usando la corrección de White-Huber disponible en la librería car, pero al costo de conducir comparaciones múltiples posiblemente sesgadas (siguiendo la lógica de realizarlas con emmeans).\nUtilizar rstatix para un ANOVA con la corrección de Welch, seguido de comparaciones múltiples con la corrección de Games-Howell y poder todavía realizar sus gráficos al costo de romper la secuencia de aprendizaje que hemos venido llevando para el ANOVA.\nUtilizar las librerías nlme para reparametrizar el modelo en forma de un modelo lineal generalizado, y posteriormente usar car y emmeans para el ANOVA y las comparaciones múltiples, respectivamente. Pero al costo de no poder graficarlas con rstatix sino desde 0.\n\nA continuación entonces iremos en este orden de las opciones: 2, 3 y 1 (la última para ejemplificar cuál sería el camino suponiendo que la homocedasticidad se hubiese cumplido)."
+  },
+  {
+    "objectID": "index.html#anova-de-múltiples-vías-en-r.-opc.-2",
+    "href": "index.html#anova-de-múltiples-vías-en-r.-opc.-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "ANOVA de múltiples vías en R. Opc. 2",
+    "text": "ANOVA de múltiples vías en R. Opc. 2\n\n\nEl inconveniente de usar la corrección de Welch es que esta se puede aplicar solo a ANOVAs de una vía.\nEntonces, de manera similar a lo hicimos para poder analizar por Kruskall-Wallis un diseño factorial, tenemos que crear una variable dummy combinando los dos factores para correr un ANOVA de una vía.\nDebemos tener en cuenta que al realizar esto, reducimos poder de la prueba estadística.\n\n\n\n\nranas$log.Age.DPO &lt;- log(ranas$Age.DPO)\nranas$tratamiento &lt;- paste(ranas$Pred, ranas$Res, sep = \"-\")\nanova_op2 &lt;- ranas %&gt;%\n  welch_anova_test(log.Age.DPO ~ tratamiento)"
+  },
+  {
+    "objectID": "index.html#anova-de-múltiples-vías-en-r.-opc.-2-1",
+    "href": "index.html#anova-de-múltiples-vías-en-r.-opc.-2-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "ANOVA de múltiples vías en R. Opc. 2",
+    "text": "ANOVA de múltiples vías en R. Opc. 2\n\nEl inconveniente de usar la corrección de Welch es que esta se puede aplicar solo a ANOVAs de una vía.\nEntonces, de manera similar a lo hicimos para poder analizar por Kruskall-Wallis un diseño factorial, tenemos que crear una variable dummy combinando los dos factores para correr un ANOVA de una vía.\nDebemos tener en cuenta que al realizar esto, reducimos poder de la prueba estadística.\n\n\nranas$log.Age.DPO &lt;- log(ranas$Age.DPO)\nranas$tratamiento &lt;- paste(ranas$Pred, ranas$Res, sep = \"-\")\nranas$tratamiento &lt;- factor(ranas$tratamiento, levels = c(\"C-Lo\", \"NL-Lo\", \"C-Hi\", \"L-Lo\", \"NL-Hi\", \"L-Hi\"))\nanova_op2 &lt;- ranas %&gt;%\n  welch_anova_test(log.Age.DPO ~ tratamiento)\nanova_op2\n\n# A tibble: 1 × 7\n  .y.             n statistic   DFn   DFd           p method     \n* &lt;chr&gt;       &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;      \n1 log.Age.DPO    78      17.2     5  24.0 0.000000305 Welch ANOVA\n\n\n\n\nAhora podemos realizar las comparaciones de HSD Tukey (con corrección de Games-Howell)\n\n\ngames_comp &lt;- ranas %&gt;% games_howell_test(log.Age.DPO ~ tratamiento)\ngames_comp &lt;- add_significance(games_comp, \n                                p.col = \"p.adj\", \n                                output.col = \"p.adj.signif\",\n                                cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),\n                                symbols = c(\"***\", \"**\", \"*\", \".\", \"ns\"))\ngames_comp\n\n# A tibble: 15 × 8\n   .y.         group1 group2 estimate conf.low conf.high      p.adj p.adj.signif\n   &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;       \n 1 log.Age.DPO C-Lo   NL-Lo  -0.155     -0.772    0.462  0.936      ns          \n 2 log.Age.DPO C-Lo   C-Hi   -0.440     -0.700   -0.180  0.000261   ***         \n 3 log.Age.DPO C-Lo   L-Lo   -0.485     -0.754   -0.217  0.0000932  ***         \n 4 log.Age.DPO C-Lo   NL-Hi  -0.493     -0.821   -0.166  0.002      **          \n 5 log.Age.DPO C-Lo   L-Hi   -0.643     -0.877   -0.408  0.00000114 ***         \n 6 log.Age.DPO NL-Lo  C-Hi   -0.285     -0.902    0.331  0.545      ns          \n 7 log.Age.DPO NL-Lo  L-Lo   -0.331     -0.947    0.286  0.419      ns          \n 8 log.Age.DPO NL-Lo  NL-Hi  -0.339     -0.961    0.284  0.433      ns          \n 9 log.Age.DPO NL-Lo  L-Hi   -0.488     -1.11     0.133  0.129      ns          \n10 log.Age.DPO C-Hi   L-Lo   -0.0452    -0.258    0.168  0.986      ns          \n11 log.Age.DPO C-Hi   NL-Hi  -0.0531    -0.351    0.244  0.988      ns          \n12 log.Age.DPO C-Hi   L-Hi   -0.202     -0.362   -0.0425 0.008      **          \n13 log.Age.DPO L-Lo   NL-Hi  -0.00797   -0.310    0.294  1          ns          \n14 log.Age.DPO L-Lo   L-Hi   -0.157     -0.334    0.0196 0.099      .           \n15 log.Age.DPO NL-Hi  L-Hi   -0.149     -0.440    0.142  0.448      ns          \n\n\n\n\n\nFinalizamos con el gráfico de estas\n\n\ngames_comp &lt;- games_comp %&gt;% \n  add_xy_position(x = \"tratamiento\", step.increase = 1)\nggboxplot(ranas,\n          x = \"tratamiento\",\n          y = \"log.Age.DPO\") + \n  stat_pvalue_manual(games_comp, \n                     hide.ns = T,\n                     y.position = c(5.1,5.5,5.9,6.3,6.7,7.1))"
+  },
+  {
+    "objectID": "index.html#anova-de-múltiples-vías-en-r.-opc.-3",
+    "href": "index.html#anova-de-múltiples-vías-en-r.-opc.-3",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "ANOVA de múltiples vías en R. Opc. 3",
+    "text": "ANOVA de múltiples vías en R. Opc. 3\n\n\nLa tercera opción involucra el reparametrizar el modelo para poder analizarlo como un modelo lineal generalizado.\nEn breve, una de las ventajas de los modelos lineales generalizados es que pueden asumir varianzas distintas a través de modelar directamente la heterocedasticidad.\nPara su implementación usaremos la librería nlme\n\n\n\n\nlibrary(nlme)\nanova_op3 &lt;- gls(log(Age.DPO) ~ Pred*Res,\n                 data = ranas,\n                 weights = varIdent(form = ~1|Pred*Res)) \n\n\n\n\nMediante la librería car podemos obtener la tabla del ANOVA (o especificamente llamada Analisis de Desviación)\n\n\nAnova(anova_op3)\n\nAnalysis of Deviance Table (Type II tests)\n\nResponse: log(Age.DPO)\n         Df   Chisq Pr(&gt;Chisq)    \nPred      2 41.5704  9.400e-10 ***\nRes       1 30.6580  3.078e-08 ***\nPred:Res  2  8.0607    0.01777 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\nAhora, usando emmeans podemos calcular el HSD de Tukey directamente sin necesidad de correcciones. Una consideración importante es que, cuando tenemos dos factores debemos hacer las comparaciones de cada factor a la vez a lo largo de los niveles del otro.\n\n\n\n\ntukey_comp_pred &lt;- emmeans(anova_op3, specs = \"Pred\", by = \"Res\", method = \"tukey\") # medias marginales esperadas\ncontrast(tukey_comp_pred, specs = \"Pred\", by = \"Res\", method = \"tukey\")\n\nRes = Hi:\n contrast estimate     SE    df t.ratio p.value\n C - NL     0.0531 0.0873 10.98   0.608  0.8186\n C - L      0.2022 0.0509 20.62   3.971  0.0020\n NL - L     0.1491 0.0765  6.94   1.949  0.1959\n\nRes = Lo:\n contrast estimate     SE    df t.ratio p.value\n C - NL     0.1548 0.1717  8.55   0.901  0.6536\n C - L      0.4854 0.0879 27.51   5.526  &lt;.0001\n NL - L     0.3306 0.1650  7.37   2.004  0.1783\n\nDegrees-of-freedom method: satterthwaite \nResults are given on the log (not the response) scale. \nP value adjustment: tukey method for comparing a family of 3 estimates \n\n\n\n\n\ntukey_comp_res &lt;- emmeans(anova_op3, specs = \"Res\", by = \"Pred\", method = \"tukey\") # medias marginales esperadas\ncontrast(tukey_comp_res, specs = \"Res\", by = \"Pred\", method = \"tukey\")\n\nPred = C:\n contrast estimate     SE    df t.ratio p.value\n Hi - Lo    -0.440 0.0847 26.09  -5.199  &lt;.0001\n\nPred = NL:\n contrast estimate     SE    df t.ratio p.value\n Hi - Lo    -0.339 0.1730  8.52  -1.957  0.0839\n\nPred = L:\n contrast estimate     SE    df t.ratio p.value\n Hi - Lo    -0.157 0.0560 18.93  -2.803  0.0114\n\nDegrees-of-freedom method: satterthwaite \nResults are given on the log (not the response) scale. \n\n\n\nPara graficar estas comparaciones mediante esta opción es necesario el empezar de cero con ggplot2. La razón es que rstatix no tiene las capacidades de lidiar con interacciones provenientes de emmeans (no es compatible con la sintaxis de los comandos contrast de arriba) por lo que dejaremos esta opción hasta aquí."
+  },
+  {
+    "objectID": "index.html#anova-de-múltiples-vías-en-r.-opc.-1",
+    "href": "index.html#anova-de-múltiples-vías-en-r.-opc.-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "ANOVA de múltiples vías en R. Opc. 1",
+    "text": "ANOVA de múltiples vías en R. Opc. 1\n\n\nFinalmente, asumamos que no tuvimos el problema de heterocedasticidad y pudimos haber seguido el curso normal para realizar las comparaciones múltiples usando solamente car, emmeans y multcomp.\nEste es el transcurso normal de tópicos en el aprendizaje del ANOVA de múltiples vías:\n\n\n\n\nTabla del ANOVA con car (mencionamos que car es capaz de llevar a cabo una corrección de heterocedasticidad, esta se consigue agregando el argumento white.adjust = T dentro de la función Anova)\n\n\nAnova(lm4)\n\nAnova Table (Type II tests)\n\nResponse: log(Age.DPO)\n          Sum Sq Df F value    Pr(&gt;F)    \nPred      1.9446  2 18.7561 2.775e-07 ***\nRes       1.8241  1 35.1871 9.576e-08 ***\nPred:Res  0.3254  2  3.1384   0.04934 *  \nResiduals 3.7324 72                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\nAl igual que en la opción 3, calculamos las comparaciones múltiples viendo a cada factor a la vez a lo largo de los niveles del otro.\n\n\ntukey_comp_pred1 &lt;- emmeans(lm4, specs = \"Pred\", by = \"Res\", type = \"response\")\ncontrast(tukey_comp_pred1, specs = \"Pred\", method = \"tukey\")\n\nRes = Hi:\n contrast ratio     SE df null t.ratio p.value\n C / NL    1.05 0.1088 72    1   0.515  0.8644\n C / L     1.22 0.0985 72    1   2.512  0.0374\n NL / L    1.16 0.1198 72    1   1.445  0.3234\n\nRes = Lo:\n contrast ratio     SE df null t.ratio p.value\n C / NL    1.17 0.1205 72    1   1.500  0.2968\n C / L     1.62 0.1308 72    1   6.030  &lt;.0001\n NL / L    1.39 0.1436 72    1   3.204  0.0057\n\nP value adjustment: tukey method for comparing a family of 3 estimates \nTests are performed on the log scale \n\n\n\n\n\ntukey_comp_res1 &lt;- emmeans(lm4, specs = \"Res\", by = \"Pred\", type = \"response\")\ncontrast(tukey_comp_res1, specs = \"Pred\", method = \"tukey\", adjust = \"holm\")\n\nPred = C:\n contrast ratio     SE df null t.ratio p.value\n Hi / Lo  0.644 0.0518 72    1  -5.470  &lt;.0001\n\nPred = NL:\n contrast ratio     SE df null t.ratio p.value\n Hi / Lo  0.713 0.0867 72    1  -2.782  0.0069\n\nPred = L:\n contrast ratio     SE df null t.ratio p.value\n Hi / Lo  0.855 0.0688 72    1  -1.951  0.0549\n\nTests are performed on the log scale"
+  },
+  {
+    "objectID": "index.html#antes-de-continuar-7",
+    "href": "index.html#antes-de-continuar-7",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Antes de continuar",
+    "text": "Antes de continuar\n\nsave_as_docx(\"Tabla Anova\" = tabla_anova, \"Tabla Tukey\" = tabla_tukey, \"Tabla Dunnett\" = tabla_dunnett,\n             \"Tabla Medias Marginales Esperadas\" = tabla_marginal,\n             path = \"C:/Users/mmore/Documents/cursos_2024/see/see-quarto-modulo5/anova.docx\")"
+  },
+  {
+    "objectID": "index.html#antes-de-continuar-8",
+    "href": "index.html#antes-de-continuar-8",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Antes de continuar",
+    "text": "Antes de continuar\n\n\nMuchas personas gustan de las tablas de grupos de Tukey para las medias marginales esperadas en diseños experimentales factoriales al estilo que usamos para poder conducir la opción 2 anteriormente descrita.\nEsta práctica es innecesaria si el investigador es capaz de hacer buenas inferencias basándose en las comparaciones por factor a lo largo de los niveles del otro.\nNo tienen ningún problema operacional ya que a la final es una reparametrización válida del modelo.\nSin embargo, cuando el modelo sobre el cual son aplicadas es incorrecto, son más susceptibles de reflejar valores p que concluyen con inferencias falaces.\nEn el largo ejemplo de las opciones a mano para lidiar con heterocedasticidad, podemos con seguridad afirmar que del peor al mejor modelo su orden sería: Opción 1 &lt; Opción 2 &lt; Opción 3.\nPara ilustrar esto, con la variable dummy que creamos en la opción 2, calculemos los grupos Tukey de las medias marginales esperadas en las opciones 1 y 3 para su comparación."
+  },
+  {
+    "objectID": "index.html#gráficos-de-interacción",
+    "href": "index.html#gráficos-de-interacción",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Gráficos de interacción",
+    "text": "Gráficos de interacción\n\n\nEs una forma de representar las predicciones lineales de un modelo con respecto a los niveles de sus factores.\nEs recomendable usarlos con factores de hasta 3 niveles y en ANOVAS de dos factores así como también con las medias marginales esperadas.\nExisten diversas formas de realizarlos en R:\n\nLibrería base de R (solo puede hacerlo con medias marginales observadas… al menos hasta donde tengo conocimiento)\nConstruirlos desde cero con ggplot2 (para las opciones 2 y 3).\nUsar librerías accesorias de ggplot2 como interactions. (Esta alternativa solo es válida para la primera opción que presentamos)"
+  },
+  {
+    "objectID": "index.html#gráficos-de-interacción-en-r",
+    "href": "index.html#gráficos-de-interacción-en-r",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Gráficos de interacción en R",
+    "text": "Gráficos de interacción en R\n\n\n\nlibrary(interactions)\ngraf_inter1 &lt;- cat_plot(\n  lm4,\n  pred = Pred,\n  modx = Res,\n  geom = \"line\",\n  data = ranas\n)\ngraf_inter1\n\n\n\n\n\n\n\n\n\n\n\n\nlibrary(interactions)\ngraf_inter2 &lt;- cat_plot(\n  lm4,\n  pred = Res,\n  modx = Pred,\n  geom = \"line\",\n  data = ranas\n)\ngraf_inter2"
+  },
+  {
+    "objectID": "index.html#autoevaluación-4",
+    "href": "index.html#autoevaluación-4",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Autoevaluación",
+    "text": "Autoevaluación\n\nEn el paquete UsingR tenemos disponible una lista con 5 objetos bajo el nombre cancer. Esta contiene el tiempo de sobreviviencia en días de pacientes con distintos tipos de cáncer desde el momento de su diagnóstico hasta su deceso. Chequea si los datos correspondientes a cáncer de colon son normalmente distribuidos. Si no lo son, prueba si puedes normalizarlos usando alguna de las tres transformaciones que vimos. En el caso que más de una transformación funcione, ¿cuál escogerías para continuar con alguna prueba estadística, y por qué?\n\nTip: usa el siguiente código para extraer en un vector los datos de pacientes con cáncer de colon:\n\ndata(cancer)\ncolon &lt;- cancer$colon"
+  },
+  {
+    "objectID": "index.html#introducción-1",
+    "href": "index.html#introducción-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Introducción",
+    "text": "Introducción\n\n\nOtro modelo estadístico ampliamente usado es la regresión lineal.\nSe diferencia del ANOVA al considerar un predictor continuo (no un factor categórico).\nLos supuestos de la regresión lineal son:\n\nExistencia de una relación lineal entre las variables continuas objeto de la regresión\nNormalidad de los residuos\nQue no exista multicolinearidad (en el caso de regresión múltiple)\nQue no exista auto correlación (que las observaciones no dependan una de otra dentro de una misma variable)\nHomogeneidad de la varianza de los residuos\n\nContrario al ANOVA, no existen correcciones o métodos alternativos cuando las transformaciones fallan.\nPor esto, lo que se recomienda hacer es mencionar todos los detalles de la conducción del modelo. Cosa que rara vez pasa.\nEn regresión lineal es quizá en el método que más se abusa del remover outliers."
+  },
+  {
+    "objectID": "index.html#regresión-lineal-en-r",
+    "href": "index.html#regresión-lineal-en-r",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Regresión lineal en R",
+    "text": "Regresión lineal en R\n\n\nUsando los datos de Touchon, podríamos preguntarnos si el tamaño de las ranas al final de la metamorfosis SVL.final está influenciado por la edad en finalizar la metamorfosis Age.DPO.\nEsta regresión lineal sería de la siguiente forma:\n\n\n\n\nlm6 &lt;- lm(SVL.final ~ Age.DPO, data = ranas)\nsummary(lm6)\n\n\nCall:\nlm(formula = SVL.final ~ Age.DPO, data = ranas)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-3.1414 -0.9521 -0.1297  0.6842  3.4349 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 21.285436   0.416763  51.073  &lt; 2e-16 ***\nAge.DPO     -0.029437   0.006052  -4.864 6.08e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.262 on 76 degrees of freedom\nMultiple R-squared:  0.2374,    Adjusted R-squared:  0.2273 \nF-statistic: 23.65 on 1 and 76 DF,  p-value: 6.081e-06\n\n\n\n\n\nPero antes de cualquier inferencia, vamos a darle un vistazo a los diagnósticos de la regresión lineal"
+  },
+  {
+    "objectID": "index.html#diagnósticos-de-la-regresión-lineal",
+    "href": "index.html#diagnósticos-de-la-regresión-lineal",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Diagnósticos de la regresión lineal",
+    "text": "Diagnósticos de la regresión lineal\n\npar(mfrow = c(2, 2))\nplot(lm6)\npar(mfrow = c(1, 1))"
+  },
+  {
+    "objectID": "index.html#diagnósticos-de-la-regresión-lineal-1",
+    "href": "index.html#diagnósticos-de-la-regresión-lineal-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Diagnósticos de la regresión lineal",
+    "text": "Diagnósticos de la regresión lineal"
+  },
+  {
+    "objectID": "index.html#diagnósticos-de-la-regresión-lineal-2",
+    "href": "index.html#diagnósticos-de-la-regresión-lineal-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Diagnósticos de la regresión lineal",
+    "text": "Diagnósticos de la regresión lineal\n\n\n\n\n\n\n\n\nResiduos vs. Valores ajustados\nEn el ANOVA vimos como este plot sugería departuras de la homocedasticidad. En el caso de la regresión lineal, los residuos al no estar agrupados en categorías presentan mayor información sobre este supuesto. Adicionalmente, curvaturas en la línea roja evidencian también departuras de la linearidad. Esto quiere decir que la relación entre las variables no es completamente lineal. A veces esto puede corregirse con transformaciones."
+  },
+  {
+    "objectID": "index.html#diagnósticos-de-la-regresión-lineal-3",
+    "href": "index.html#diagnósticos-de-la-regresión-lineal-3",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Diagnósticos de la regresión lineal",
+    "text": "Diagnósticos de la regresión lineal\n\n\nEs ideal. (b) Es indicativo de no linearidad. (c) Evidencia de heterocedasticidad. (d) Evidencia de una tendencia temporal"
+  },
+  {
+    "objectID": "index.html#diagnósticos-de-la-regresión-lineal-4",
+    "href": "index.html#diagnósticos-de-la-regresión-lineal-4",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Diagnósticos de la regresión lineal",
+    "text": "Diagnósticos de la regresión lineal\n\n\n\n\n\n\n\n\nGráfico Q-Q\nMisma explicación que antes"
+  },
+  {
+    "objectID": "index.html#diagnósticos-de-la-regresión-lineal-5",
+    "href": "index.html#diagnósticos-de-la-regresión-lineal-5",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Diagnósticos de la regresión lineal",
+    "text": "Diagnósticos de la regresión lineal\n\n\n\n\n\n\n\n\nRaíz cuadrada de los residuos estandarizados vs. Valores ajustados\nMisma explicación que antes"
+  },
+  {
+    "objectID": "index.html#diagnósticos-de-la-regresión-lineal-6",
+    "href": "index.html#diagnósticos-de-la-regresión-lineal-6",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Diagnósticos de la regresión lineal",
+    "text": "Diagnósticos de la regresión lineal\n\n\n\n\n\n\n\n\nResiduos vs. Apalancamiento\nAquellos puntos que estén etiquetados con números son mostrados como posibles outliers bajo dos criterios:\n\nEstán por fuera de los límites de la regla del rango intercuartílico (IQR), y\nMarcados como outliers con influencia de apalancamiento mediante la prueba de Cook (distancia de Cook).\n\nEl segundo criterio es un argumento sólido para remover outliers."
+  },
+  {
+    "objectID": "index.html#pruebas-formales-de-los-supuestos",
+    "href": "index.html#pruebas-formales-de-los-supuestos",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Pruebas formales de los supuestos",
+    "text": "Pruebas formales de los supuestos\n\n\nComo vimos, los supuestos de la regresión lineal son más que para el ANOVA.\nExisten varias pruebas formales para chequear cada uno de sus supuestos, sin embargo rara vez son empleadas.\nLa razón yace en que si los aplicáramos todo el tiempo, no haríamos regresiones lineales ni el 10% de las veces.\nSi tienes curiosidad en estas pruebas puedes visitar este enlace.\nDe alguna manera podemos decir que de hecho, los estadísticos somos más laxos con la regresión lineal, sin embargo esto es bajo el supuesto no estadístico de que estas departuras de los supuestos fueran debidamente documentadas y plasmadas en los trabajos científicos, lo cual lamentablemente no pasa muy a menudo.\nExisten por supuesto métodos que no dependen de todos estos supuestos (por ejemplo: regresiones lineales Bayesianas, modelos lineales generalizados correctamente parametrizados) pero no son parte de este curso."
+  },
+  {
+    "objectID": "index.html#transformación-de-datos",
+    "href": "index.html#transformación-de-datos",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Transformación de datos",
+    "text": "Transformación de datos\n\n\nAl igual que en el ANOVA, podemos recurrir a transformaciones de datos que nos permitan aliviar varios de los supuestos no cumplidos de la regresión lineal.\nEn el presente caso, esto lo logramos al utilizar el logaritmo natural de las dos variables del modelo\n\n\n\n\nlm6 &lt;- lm(log(SVL.final) ~ log(Age.DPO), data = ranas)\npar(mfrow = c(2, 2))\nplot(lm6)\n\n\n\npar(mfrow = c(1, 1))\nsummary(lm6)\n\n\nCall:\nlm(formula = log(SVL.final) ~ log(Age.DPO), data = ranas)\n\nResiduals:\n      Min        1Q    Median        3Q       Max \n-0.182298 -0.049070  0.000516  0.038342  0.159057 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   3.44001    0.09211  37.345  &lt; 2e-16 ***\nlog(Age.DPO) -0.11624    0.02232  -5.208 1.58e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.06244 on 76 degrees of freedom\nMultiple R-squared:  0.263, Adjusted R-squared:  0.2533 \nF-statistic: 27.12 on 1 and 76 DF,  p-value: 1.581e-06"
+  },
+  {
+    "objectID": "index.html#interpretación-de-la-regresión-lineal",
+    "href": "index.html#interpretación-de-la-regresión-lineal",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Interpretación de la regresión lineal",
+    "text": "Interpretación de la regresión lineal\n\n\\[\ny = mx + b\n\\]\n\n\n\n\n\nCall:\nlm(formula = log(SVL.final) ~ log(Age.DPO), data = ranas)\n\nResiduals:\n      Min        1Q    Median        3Q       Max \n-0.182298 -0.049070  0.000516  0.038342  0.159057 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   3.44001    0.09211  37.345  &lt; 2e-16 ***\nlog(Age.DPO) -0.11624    0.02232  -5.208 1.58e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.06244 on 76 degrees of freedom\nMultiple R-squared:  0.263, Adjusted R-squared:  0.2533 \nF-statistic: 27.12 on 1 and 76 DF,  p-value: 1.581e-06\n\n\n\n\n\nPor cada incremento en una unidad del logaritmo de Age.DPO, tenemos una unidad en descenso del logaritmo de SVL.final\n\n\n\n\nggplot(ranas, aes(x = log(Age.DPO), y = log(SVL.final))) +\n  geom_point()+\n  geom_smooth(method = \"lm\")"
+  },
+  {
+    "objectID": "index.html#interpretación-de-la-regresión-lineal-1",
+    "href": "index.html#interpretación-de-la-regresión-lineal-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Interpretación de la regresión lineal",
+    "text": "Interpretación de la regresión lineal\n\n\nSin embargo una interpretación en la escala logarítmica no es completamente entendible, al menos para alguien ajeno al análisis que realizamos.\nPodríamos hacer la retransformación de las variables a sus unidades originales y generar un gráfico de las predicciones. A la final se reduce a matemática básica.\nAfortunadamente la librería ggeffects nos salva de ese dilema!\n\n\n\n\nlibrary(ggeffects)\npredicciones &lt;- ggpredict(lm6)\npredicciones\n\n$Age.DPO\n# Predicted values of SVL.final\n\nAge.DPO | Predicted |         95% CI\n------------------------------------\n     35 |     20.63 | [20.05, 21.23]\n     50 |     19.79 | [19.46, 20.13]\n     60 |     19.38 | [19.11, 19.65]\n     75 |     18.88 | [18.57, 19.20]\n     90 |     18.48 | [18.08, 18.90]\n    105 |     18.16 | [17.66, 18.67]\n    120 |     17.88 | [17.30, 18.48]\n    145 |     17.49 | [16.79, 18.22]\n\nattr(,\"class\")\n[1] \"ggalleffects\" \"list\"        \nattr(,\"model.name\")\n[1] \"lm6\"\n\n\n\n\n\nY finalmente el gráfico de predicciones\n\n\nplot(predicciones$Age.DPO)"
+  },
+  {
+    "objectID": "index.html#el-mágico-r2",
+    "href": "index.html#el-mágico-r2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "El mágico \\(R^2\\)",
+    "text": "El mágico \\(R^2\\)"
+  },
+  {
+    "objectID": "index.html#el-mágico-r2-1",
+    "href": "index.html#el-mágico-r2-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "El mágico \\(R^2\\)",
+    "text": "El mágico \\(R^2\\)\n\n\nQuizá muchos hayan escuchado que un \\(R^2\\) cercano a 1 es “ideal” cuando realizamos una regresión lineal.\nRecuerdo incluso haber sido indoctrinado acerca de márgenes para un buen \\(R^2\\) (algo así como que por encima del 80% es “bueno”, mayor al 90% es excelente y 100% es el Nirvana).\nEn breve, \\(R^2\\) NO ES NINGUNA DE LAS SIGUIENTES COSAS:\n\nUna métrica de bondad de ajuste: no nos dice si el modelo se ajusta bien a los datos.\nUna métrica del error de predicción: no mide para nada que tan bueno es el modelo para predecir futuras observaciones.\nUna métrica que permita comparar modelos usando variables transformadas: es común jugar a transformar los datos para ver de que manera se puede inflarlo hacia el santo grial.\nUna métrica que permita que tan bien una variable explica otra: en el ejemplo que vimos, y en toda regresión lineal, si cambiamos el predictor por respuesta y viceversa, tendremos exactamente el mismo \\(R^2\\)\n\n\\(R^2\\) es simplemente una medida de la cantidad de variación que un modelo específico explica. ¿Tiene alguna utilidad práctica? no lo sé, en 10 años como estadístico no lo he usado nunca, al menos no, voluntariamente…"
+  },
+  {
+    "objectID": "index.html#el-mágico-r2-2",
+    "href": "index.html#el-mágico-r2-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "El mágico \\(R^2\\)",
+    "text": "El mágico \\(R^2\\)\n\n\nLo que visto es carnicerías de datos por inflar \\(R^2\\) debido a esta mala interpretación que no se sabe su origen exacto (pero quizá aquí uno de tantos culpables perdidos en la historia).\n\n\n\n\nAcá les dejo unos cuantos recursos que pueden revisar en más detalle si les interesa:\n\nEl paper “How not to lie with Statistics: Avoiding common mistakes in Quantitative Political Science” Un artículo extenso pero que contiene una sección dedicada a desmitificar esta mala práctica.\nLas notas de la clase del Prof. Cosma Shalizi de la Universidad Carnegie Mellon donde hermosamente destruye los mitos en torno al \\(R^2\\) citando fórmulas y principios estadísticos.\nUn blog de Clay Ford, consultor estadístico de la Universidad de Virginia donde demuestra con R que valores de \\(R^2\\) cercanos a 0 no necesariamente implican un mal modelo, ni valores cercanos 1 son indicativo de modelos destacados."
+  },
+  {
+    "objectID": "index.html#funciones-y-librerías-en-esta-sesión",
+    "href": "index.html#funciones-y-librerías-en-esta-sesión",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Funciones y librerías en esta sesión",
+    "text": "Funciones y librerías en esta sesión\nLibrerías\n\nUsingR y datarium contienen recursos de aprendizaje, tablas de datos básicamente.\nrstatix es una librería para llevar a cabo tests y pruebas estadísticas básicas basada en el funcionamiento del operador de cascada de dplyr\ncar contiene diversas funciones para llevar a cabo análisis estadísticos. Está desarrollado como material adicional de un libro.\nggeffects ofrece funcionalidades de computación y visualización de medias marginales de una amplia diversidad de tipos de modelos.\nemmeans se especializa en proveer funciones para el cómputo y análisis relacionados de medias marginales de diversos modelos estadísticos. multcomp y multcompView ofrecen funciones para dar formato a resultados producidos por emmeans.\nolsrr ofrece varias pruebas estadísticas para modelos. En este módulo lo hemos usado únicamente para cómputo de pruebas de homocedasticidad de residuos.\nggpubr es una librería que ofrece una sintaxis reducida para producir figuras de una manera más sencilla que el uso total de ggplot2."
+  },
+  {
+    "objectID": "index.html#antes-de-continuar-9",
+    "href": "index.html#antes-de-continuar-9",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Antes de continuar",
+    "text": "Antes de continuar\n\n\nGrupos Tukey de las medias marginales esperadas en la opción 1\n\n\nlm_op1 &lt;- lm(log(Age.DPO) ~ tratamiento, data = ranas)\nemm_op1 &lt;- emmeans(lm_op1, specs = \"tratamiento\", type = \"response\")\nt_grupos_op1 &lt;- contrast(emm_op1, specs = \"tratamiento\", method = \"tukey\")\nt_grupos_op1 &lt;- add_significance(as.data.frame(t_grupos_op1), \n                                p.col = \"p.value\", \n                                output.col = \"p.adj.signif.op1\",\n                                cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),\n                                symbols = c(\"***\", \"**\", \"*\", \".\", \"ns\"))\n\n\n\n\nGrupos Tukey de las medias marginales esperadas en la opción 3\n\n\nlm_op3 &lt;- gls(log(Age.DPO) ~ tratamiento,\n                 data = ranas,\n                 weights = varIdent(form = ~1|tratamiento)) \nemm_op3 &lt;- emmeans(lm_op3, specs = \"tratamiento\", type = \"response\")\nt_grupos_op3 &lt;- contrast(emm_op3, specs = \"tratamiento\", method = \"tukey\")\nt_grupos_op3 &lt;- add_significance(as.data.frame(t_grupos_op3), \n                                p.col = \"p.value\", \n                                output.col = \"p.adj.signif.op3\",\n                                cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),\n                                symbols = c(\"***\", \"**\", \"*\", \".\", \"ns\"))\n\n\n\n\nUn poco de carpintería\n\n\ncolnames(games_comp)[c(7,8)] &lt;- c(\"p.value.op2\", \"p.adj.signif.op2\")\ncolnames(t_grupos_op3)[7] &lt;- \"p.value.op3\"\ncolnames(t_grupos_op1)[7] &lt;- \"p.value.op1\"\n\ncomp_table &lt;- cbind(t_grupos_op3[,1],\n                    t_grupos_op1[,c(7, 8)],\n                    games_comp[,c(7, 8)],\n                    t_grupos_op3[,c(7, 8)])\n\ncomp_table &lt;- flextable(comp_table)\nfinal_comp_table &lt;- colformat_double(comp_table, j = c(2, 4, 6), digits = 3)\nfinal_comp_table\n\n\nt_grupos_op3[, 1]p.value.op1p.adj.signif.op1p.value.op2p.adj.signif.op2p.value.op3p.adj.signif.op3(C-Lo) / (NL-Lo)0.665ns0.936ns0.936ns(C-Lo) / (C-Hi)0.000***0.000***0.000***(C-Lo) / (L-Lo)0.000***0.000***0.000***(C-Lo) / (NL-Hi)0.000***0.002**0.002**(C-Lo) / (L-Hi)0.000***0.000***0.000***(NL-Lo) / (C-Hi)0.075.0.545ns0.545ns(NL-Lo) / (L-Lo)0.024*0.419ns0.419ns(NL-Lo) / (NL-Hi)0.072.0.433ns0.433ns(NL-Lo) / (L-Hi)0.000***0.129ns0.129ns(C-Hi) / (L-Lo)0.993ns0.986ns0.987ns(C-Hi) / (NL-Hi)0.995ns0.988ns0.988ns(C-Hi) / (L-Hi)0.134ns0.008**0.009**(L-Lo) / (NL-Hi)1.000ns1.000ns1.000ns(L-Lo) / (L-Hi)0.380ns0.099.0.097.(NL-Hi) / (L-Hi)0.699ns0.448ns0.447ns"
+  },
+  {
+    "objectID": "index.html#autoevaluación-5",
+    "href": "index.html#autoevaluación-5",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Autoevaluación",
+    "text": "Autoevaluación\n\nCon el vector de nombre colon que creaste en la anterior autoevaluación, aplica una prueba de Wilcoxon para una muestra bajo la hipótesis de que la mediana de los días de superviviencia de un paciente con cáncer de colon es de 370 días.\nA partir de la tabla de datos de felicidad de la Prof. Navarro, lleva a cabo una prueba de Wilcoxon para dos muestras emparejadas de la felicidad de los estudiantes antes y después de recibir una clase de Estadística. Compara el resultado con la prueba de una muestra que usé de ejemplo. ¿Por qué no hay diferencia?."
+  },
+  {
+    "objectID": "index.html#autoevaluación-6",
+    "href": "index.html#autoevaluación-6",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Autoevaluación",
+    "text": "Autoevaluación\n\nEncuentra si existen diferencias en la longitud nariz-cloaca al emerger (SVL.initial) con respecto a los predadores Pred en los datos de Touchon. ¿Qué método es factible usar?, ¿ANOVA de una vía o Kruskal-Wallis?"
+  },
+  {
+    "objectID": "index.html#autoevaluación-7",
+    "href": "index.html#autoevaluación-7",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Autoevaluación",
+    "text": "Autoevaluación\n\nLleva a cabo un ANOVA de dos vías para las variables Resorb.days y los factores Pred y Res. La pregunta a investigar es saber si existe una interacción entre la presencia de predadores a distintos niveles de recursos que afecte el tiempo de reabsorción de la cola en los renacuajos de ranas arbóreas de ojos rojos.\nA pesar de que el modelo para Resorb.day que acabas de hacer cumple con los supuestos del ANOVA, solo por aprendizaje, conduce una prueba de Kruskal-Wallis usando los mismos factores."
+  },
+  {
+    "objectID": "index.html#anova-de-una-vía-en-r-1",
+    "href": "index.html#anova-de-una-vía-en-r-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "ANOVA de una vía en R",
+    "text": "ANOVA de una vía en R\n\n\nOpción 1\n\nlibrary(car)\nlm1 &lt;- lm(Age.FromEmergence ~ Pred, data = ranas)\nreport(Anova(lm1))\n\n\nOpción 2\n\nanova1 &lt;- aov(Age.FromEmergence ~ Pred, data = ranas)\nreport(anova1)\n\n\n\n\n\n\n\nThe ANOVA suggests that:\n\n  - The main effect of Pred is statistically significant and large (F(2, 75) =\n10.44, p &lt; .001; Eta2 = 0.22, 95% CI [0.09, 1.00])\n\nEffect sizes were labelled following Field's (2013) recommendations.\n\n\n\n\n\nThe ANOVA (formula: Age.FromEmergence ~ Pred) suggests that:\n\n  - The main effect of Pred is statistically significant and large (F(2, 75) =\n10.44, p &lt; .001; Eta2 = 0.22, 95% CI [0.09, 1.00])\n\nEffect sizes were labelled following Field's (2013) recommendations."
+  },
+  {
+    "objectID": "index.html#es-r2-realmente-útil",
+    "href": "index.html#es-r2-realmente-útil",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "¿Es \\(R^2\\) realmente útil?",
+    "text": "¿Es \\(R^2\\) realmente útil?"
+  },
+  {
+    "objectID": "index.html#es-r2-realmente-útil-1",
+    "href": "index.html#es-r2-realmente-útil-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "¿Es \\(R^2\\) realmente útil?",
+    "text": "¿Es \\(R^2\\) realmente útil?\n\n\nQuizá muchos hayan escuchado que un \\(R^2\\) cercano a 1 es “ideal” cuando realizamos una regresión lineal.\nHay incluso márgenes para un buen \\(R^2\\) (algo así como que por encima del 80% es “bueno”, mayor al 90% es excelente).\nEn breve, \\(R^2\\) NO ES NINGUNA DE LAS SIGUIENTES COSAS:\n\nUna métrica de bondad de ajuste: no nos dice si el modelo se ajusta bien a los datos.\nUna métrica del error de predicción: no mide para nada que tan bueno es el modelo para predecir futuras observaciones.\nUna métrica que permita comparar modelos usando variables transformadas: es común jugar a transformar los datos para ver de que manera se puede inflarlo.\nUna métrica que permita que tan bien una variable explica otra: en el ejemplo que vimos, y en toda regresión lineal, si cambiamos el predictor por respuesta y viceversa, tendremos exactamente el mismo \\(R^2\\)\n\n\\(R^2\\) es simplemente una medida de la cantidad de variación que un modelo específico explica. ¿Tiene alguna utilidad práctica?"
+  },
+  {
+    "objectID": "index.html#es-r2-realmente-útil-2",
+    "href": "index.html#es-r2-realmente-útil-2",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "¿Es \\(R^2\\) realmente útil?",
+    "text": "¿Es \\(R^2\\) realmente útil?\n\n\nHe visto carnicerías de datos por inflar \\(R^2\\) debido a su mala interpretación de la cual no se sabe su origen exacto (pero quizá aquí uno de tantos culpables perdidos en la historia).\n\n\n\n\nAcá les dejo unos cuantos recursos que pueden revisar en más detalle si les interesa:\n\nEl paper “How not to lie with Statistics: Avoiding common mistakes in Quantitative Political Science” Un artículo extenso pero que contiene una sección dedicada a desmitificar esta mala práctica.\nLas notas de la clase del Prof. Cosma Shalizi de la Universidad Carnegie Mellon donde hermosamente destruye los mitos en torno al \\(R^2\\) citando fórmulas y principios estadísticos.\nUn blog de Clay Ford, consultor estadístico de la Universidad de Virginia donde demuestra con R que valores de \\(R^2\\) cercanos a 0 no necesariamente implican un mal modelo, ni valores cercanos 1 son indicativo de modelos destacados."
+  }
+]
