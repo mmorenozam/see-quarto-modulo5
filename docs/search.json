@@ -999,5 +999,26 @@
     "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
     "section": "¿Es \\(R^2\\) realmente útil?",
     "text": "¿Es \\(R^2\\) realmente útil?\n\n\nHe visto carnicerías de datos por inflar \\(R^2\\) debido a su mala interpretación de la cual no se sabe su origen exacto (pero quizá aquí uno de tantos culpables perdidos en la historia).\n\n\n\n\nAcá les dejo unos cuantos recursos que pueden revisar en más detalle si les interesa:\n\nEl paper “How not to lie with Statistics: Avoiding common mistakes in Quantitative Political Science” Un artículo extenso pero que contiene una sección dedicada a desmitificar esta mala práctica.\nLas notas de la clase del Prof. Cosma Shalizi de la Universidad Carnegie Mellon donde hermosamente destruye los mitos en torno al \\(R^2\\) citando fórmulas y principios estadísticos.\nUn blog de Clay Ford, consultor estadístico de la Universidad de Virginia donde demuestra con R que valores de \\(R^2\\) cercanos a 0 no necesariamente implican un mal modelo, ni valores cercanos 1 son indicativo de modelos destacados."
+  },
+  {
+    "objectID": "index.html#evaluación-del-curso",
+    "href": "index.html#evaluación-del-curso",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Evaluación del curso",
+    "text": "Evaluación del curso\nDeseo saber tu opinión acerca del curso hasta este momento. Por favor, ingresa al menti haciendo click aquí o con el siguiente código QR:"
+  },
+  {
+    "objectID": "index.html#evaluación-del-curso-hasta-el-momento",
+    "href": "index.html#evaluación-del-curso-hasta-el-momento",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Evaluación del curso hasta el momento",
+    "text": "Evaluación del curso hasta el momento\n\n\nDeseo saber tu opinión acerca del curso hasta este momento:\n\nOpinión general del curso (satisfacción, claridad, material)\n¿Qué tan novedoso es el curso para ti?\nAlgo nuevo que hayas aprendido\nTu parte favorita\n¿Qué cambiarías?\n¿Qué te hubiese gustado aprender aparte de los contenidos propuestos?"
+  },
+  {
+    "objectID": "index.html#evaluación-del-curso-hasta-el-momento-1",
+    "href": "index.html#evaluación-del-curso-hasta-el-momento-1",
+    "title": "Módulo 5: Breve introducción a la Estadística Inferencial en R",
+    "section": "Evaluación del curso hasta el momento",
+    "text": "Evaluación del curso hasta el momento\nPor favor, ingresa al menti haciendo click aquí o con el siguiente código QR:"
   }
 ]

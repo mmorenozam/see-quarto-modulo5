@@ -22,7 +22,32 @@ format:
       - pointer
 ---
 
-# Antes de comenzar
+# ¡Antes de comenzar por hoy!
+
+## Evaluación del curso hasta el momento
+
+:::incremental
+
+-   Deseo saber tu opinión acerca del curso hasta este momento:
+
+      -   Opinión general del curso (satisfacción, claridad, material)
+      
+      -   ¿Qué tan novedoso es el curso para ti?
+      
+      -   Algo nuevo que hayas aprendido
+      
+      -   Tu parte favorita
+      
+      -   ¿Qué cambiarías?
+      
+      -   ¿Qué te hubiese gustado aprender aparte de los contenidos propuestos?
+:::
+
+## Evaluación del curso hasta el momento {visibility="uncounted"}
+
+Por favor, ingresa al menti [haciendo click aquí](https://www.menti.com/alybsy8vcxzi){target="_blank"} o con el siguiente código QR:
+
+![](images/mentimeter_qr_code.png){fig-align="center"}
 
 ## Generalidades {.smaller .scrollable}
 
